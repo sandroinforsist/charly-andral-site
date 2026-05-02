@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Charly Andral Osbourne — Site Mockup</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0a0a0a;
+    --bg-secondary: #111;
+    --text: #e8e8e8;
+    --text-muted: #888;
+    --text-dim: #555;
+    --accent: #c8b88a;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', -apple-system, sans-serif;
+    --transition: 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); overflow-x: hidden; }
+
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 40px;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.9) 0%, transparent 100%);
+    transition: var(--transition);
+  }
+  nav.scrolled { background: rgba(10,10,10,0.95); backdrop-filter: blur(12px); }
+  .nav-logo {
+    font: 400 18px var(--serif); letter-spacing: 2px; color: var(--text);
+    text-decoration: none; text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font: 300 13px var(--sans); letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--text-muted); text-decoration: none; transition: color 0.3s;
+    cursor: pointer;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+  section { min-height: 100vh; position: relative; }
+  .section-label {
+    position: absolute; top: 20px; right: 40px;
+    font: 300 10px var(--sans); letter-spacing: 3px; text-transform: uppercase;
+    color: var(--text-dim); writing-mode: vertical-rl;
+  }
+
+  #home {
+    display: flex; align-items: center; justify-content: center;
+    height: 100vh; overflow: hidden; position: relative;
+  }
+  .home-slides {
+    position: absolute; inset: 0;
+  }
+  .home-slide {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    opacity: 0; transition: opacity 1.5s ease;
+  }
+  .home-slide.active { opacity: 1; }
+  .home-dim {
+    position: absolute; inset: 0;
+    background: rgba(10,10,10,0.45);
+  }
+  .home-content {
+    position: relative; z-index: 2; text-align: center;
+    animation: fadeUp 1.5s ease-out;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .home-title {
+    font: 300 72px var(--serif); letter-spacing: 6px; text-transform: uppercase;
+    line-height: 1.1; margin-bottom: 16px;
+  }
+  .home-subtitle {
+    font: 300 14px var(--sans); letter-spacing: 4px; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 48px;
+  }
+  .home-enter {
+    font: 300 12px var(--sans); letter-spacing: 3px; text-transform: uppercase;
+    color: var(--accent); text-decoration: none; cursor: pointer;
+    border-bottom: 1px solid rgba(200,184,138,0.3); padding-bottom: 4px;
+    transition: border-color 0.3s;
+  }
+  .home-enter:hover { border-color: var(--accent); }
+  .scroll-hint {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 0.3; } 50% { opacity: 0.8; } }
+  .scroll-hint span {
+    font: 300 9px var(--sans); letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .scroll-line { width: 1px; height: 40px; background: var(--text-dim); }
+
+  .img-placeholder {
+    background: linear-gradient(135deg, #1a1a1a 0%, #222 50%, #1a1a1a 100%);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-dim); font: 300 11px var(--sans); letter-spacing: 1px;
+    text-transform: uppercase; overflow: hidden; position: relative;
+  }
+  .img-placeholder::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.02) 50%, transparent 60%);
+    animation: shimmer 3s ease-in-out infinite;
+  }
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  #artworks { padding: 140px 40px 80px; }
+  .section-header { margin-bottom: 60px; }
+  .section-header h2 {
+    font: 300 48px var(--serif); letter-spacing: 3px; margin-bottom: 12px;
+  }
+  .section-header p {
+    font: 300 14px var(--sans); color: var(--text-muted); max-width: 500px;
+    line-height: 1.6;
+  }
+
+  .artworks-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  }
+  .artwork-card {
+    position: relative; overflow: hidden; cursor: pointer; aspect-ratio: 4/3;
+  }
+  .artwork-card .img-placeholder { width: 100%; height: 100%; transition: transform 0.8s cubic-bezier(0.25,0.1,0.25,1); }
+  .artwork-card:hover .img-placeholder { transform: scale(1.05); }
+  .artwork-card .overlay {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    justify-content: flex-end; padding: 24px;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+    opacity: 0; transition: opacity 0.5s;
+  }
+  .artwork-card:hover .overlay { opacity: 1; }
+  .artwork-card .overlay h3 {
+    font: 400 18px var(--serif); letter-spacing: 1px; margin-bottom: 4px;
+  }
+  .artwork-card .overlay span {
+    font: 300 11px var(--sans); color: var(--text-muted); letter-spacing: 1px;
+  }
+  .artwork-card.featured {
+    grid-column: 1 / 3; grid-row: 1 / 3; aspect-ratio: auto;
+  }
+
+  #artwork-detail { padding: 140px 40px 80px; }
+  .detail-hero { width: 100%; aspect-ratio: 21/9; margin-bottom: 48px; }
+  .detail-header {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 80px;
+  }
+  .detail-header h2 { font: 300 42px var(--serif); letter-spacing: 2px; margin-bottom: 16px; }
+  .detail-meta { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
+  .detail-meta span { font: 300 12px var(--sans); color: var(--text-muted); letter-spacing: 1px; }
+  .detail-text {
+    font: 300 15px var(--sans); line-height: 1.8; color: var(--text-muted); max-width: 480px;
+  }
+  .detail-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .detail-gallery .img-placeholder { aspect-ratio: 1; }
+  .detail-gallery .img-placeholder.wide { grid-column: span 2; aspect-ratio: 2/1; }
+  .gallery-caption {
+    padding: 12px 0; font: italic 300 12px var(--serif); color: var(--text-dim); letter-spacing: 0.5px;
+  }
+  .back-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    font: 300 12px var(--sans); letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--text-muted); text-decoration: none; margin-bottom: 40px;
+    transition: color 0.3s; cursor: pointer;
+  }
+  .back-link:hover { color: var(--text); }
+
+  #projects { padding: 140px 40px 80px; background: var(--bg-secondary); }
+  .projects-list { display: flex; flex-direction: column; gap: 0; }
+  .project-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    cursor: pointer; transition: background 0.3s;
+  }
+  .project-row:last-child { border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .project-row:hover { background: rgba(255,255,255,0.02); }
+  .project-row .img-placeholder { aspect-ratio: 16/9; }
+  .project-info {
+    display: flex; flex-direction: column; justify-content: center; padding: 40px 48px;
+  }
+  .project-info h3 {
+    font: 400 28px var(--serif); letter-spacing: 1px; margin-bottom: 8px; transition: color 0.3s;
+  }
+  .project-row:hover .project-info h3 { color: var(--accent); }
+  .project-info .tag {
+    font: 300 11px var(--sans); letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 16px;
+  }
+  .project-info p {
+    font: 300 13px var(--sans); color: var(--text-muted); line-height: 1.6; max-width: 400px;
+  }
+  .project-row:nth-child(even) { direction: rtl; }
+  .project-row:nth-child(even) > * { direction: ltr; }
+
+  #about { padding: 140px 40px 80px; }
+  .about-layout {
+    display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: start;
+  }
+  .about-portrait { aspect-ratio: 3/4; width: 100%; max-width: 400px; }
+  .about-content h2 { font: 300 42px var(--serif); letter-spacing: 2px; margin-bottom: 32px; }
+  .about-content p {
+    font: 300 14px var(--sans); line-height: 1.8; color: var(--text-muted);
+    margin-bottom: 20px; max-width: 520px;
+  }
+  .about-contact {
+    margin-top: 48px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .about-contact h4 {
+    font: 500 11px var(--sans); letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 16px;
+  }
+  .about-contact a {
+    display: block; font: 300 14px var(--sans); color: var(--text-muted);
+    text-decoration: none; margin-bottom: 8px; transition: color 0.3s;
+  }
+  .about-contact a:hover { color: var(--accent); }
+
+  footer {
+    padding: 40px; border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  footer span { font: 300 11px var(--sans); color: var(--text-dim); letter-spacing: 1px; }
+
+  .page { display: none; }
+  .page.active { display: block; animation: pageIn 0.6s ease-out; }
+  @keyframes pageIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
+    .home-title { font-size: 36px; letter-spacing: 3px; }
+    .artworks-grid { grid-template-columns: 1fr; }
+    .artwork-card:first-child { grid-column: auto; grid-row: auto; }
+    .detail-header { grid-template-columns: 1fr; gap: 32px; }
+    .detail-gallery { grid-template-columns: repeat(2, 1fr); }
+    .project-row { grid-template-columns: 1fr; }
+    .project-row:nth-child(even) { direction: ltr; }
+    .about-layout { grid-template-columns: 1fr; }
+    nav { padding: 16px 20px; }
+    .nav-links { gap: 16px; }
+    .nav-links a { font-size: 11px; }
+    section { padding-left: 20px !important; padding-right: 20px !important; }
+  }
+</style>
+</head>
+<body>
+
+
+<nav id="mainNav">
+  <a class="nav-logo" href="#" onclick="showPage('home')">Charly Andral</a>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')" class="active" id="nav-home">Home</a></li>
+    <li><a onclick="showPage('artworks')" id="nav-artworks">Artworks</a></li>
+    <li><a onclick="showPage('projects')" id="nav-projects">Projects</a></li>
+    <li><a onclick="showPage('about')" id="nav-about">About</a></li>
+  </ul>
+</nav>
+
+<!-- HOME -->
+<div id="page-home" class="page active">
+<section id="home">
+  <div class="home-slides">
+    <div class="home-slide active" style="background-image:url('assets/img/home/home-1.jpg')"></div>
+    <div class="home-slide" style="background-image:url('assets/img/home/home-2.jpg')"></div>
+    <div class="home-slide" style="background-image:url('assets/img/home/home-3.jpg')"></div>
+    <div class="home-slide" style="background-image:url('assets/img/home/home-4.jpg')"></div>
+    <div class="home-slide" style="background-image:url('assets/img/home/home-5.jpg')"></div>
+  </div>
+  <div class="home-dim"></div>
+  <div class="home-content">
+    <h1 class="home-title">Charly<br>Andral</h1>
+    <p class="home-subtitle">Visual artist · São Paulo</p>
+    <a class="home-enter" onclick="showPage('artworks')">Enter</a>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+</div>
+
+<!-- ARTWORKS -->
+<div id="page-artworks" class="page">
+<section id="artworks">
+  <div class="section-label">Selected works</div>
+  <div class="section-header">
+    <h2>Artworks</h2>
+    <p>Installations, digital collages, performances, and urban interventions exploring the tensions between nature, infrastructure, and human excess.</p>
+  </div>
+  <div class="artworks-grid">
+    <div class="artwork-card" onclick="showPage('artwork-detail')">
+      <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-03.jpg'); background-size:cover; background-position:center;">
+      </div>
+      <div class="overlay">
+        <h3>Cuts through a Sugarcane Archipelago (at scale)</h3>
+        <span>Since 2024 · Digital collage · Ongoing</span>
+      </div>
+    </div>
+    <div class="artwork-card" onclick="showPage('detail-selva')">
+      <div class="img-placeholder" style="background-image:url('assets/img/selva/selva-04.jpg'); background-size:cover; background-position:center;">
+      </div>
+      <div class="overlay">
+        <h3>A selva que nos escapa</h3>
+        <span>Since 2020 · Habitable installation · Performances</span>
+      </div>
+    </div>
+    <div class="artwork-card" onclick="showPage('detail-rewilding')">
+      <div class="img-placeholder" style="background-image:url('assets/img/rewilding/rewilding-01.jpg'); background-size:cover; background-position:center;">
+      </div>
+      <div class="overlay">
+        <h3>Rewilding SP</h3>
+        <span>2023 · Digital collage</span>
+      </div>
+    </div>
+    <div class="artwork-card" onclick="showPage('detail-olhos')">
+      <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-02.jpg'); background-size:cover; background-position:center;">
+      </div>
+      <div class="overlay">
+        <h3>Olhos nos olhos</h3>
+        <span>2023 · Installation · Urban intervention</span>
+      </div>
+    </div>
+    <div class="artwork-card" onclick="showPage('detail-ubris')">
+      <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-18.jpg'); background-size:cover; background-position:center;">
+      </div>
+      <div class="overlay">
+        <h3>Ubris, des fêtes divines et dérisoires</h3>
+        <span>2015–2018 · Performances · Relational art</span>
+      </div>
+    </div>
+    <div class="artwork-card">
+      <div class="img-placeholder" style="background: linear-gradient(135deg, #1a1520 0%, #25182a 60%, #15101a 100%); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:6px;">
+        <span style="font:300 11px var(--sans); letter-spacing:2px; text-transform:uppercase; color:var(--text-dim);">Photo pending</span>
+      </div>
+      <div class="overlay">
+        <h3>Oxymoron Suits (S.A.P.E.)</h3>
+        <span>2015–2018 · Wax fabric garment · Clothing design</span>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ARTWORK DETAIL -->
+<div id="page-artwork-detail" class="page">
+<section id="artwork-detail">
+  <a class="back-link" onclick="showPage('artworks')">← Back to Artworks</a>
+  <div class="detail-hero" style="background-image:url('assets/img/sugarcane/sugarcane-03.jpg'); background-size:cover; background-position:center;"></div>
+  <div class="detail-header">
+    <div>
+      <h2>Cuts through a Sugarcane Archipelago (at scale)</h2>
+      <div class="detail-meta">
+        <span>Digital collage · Various formats</span>
+        <span>2024 / 2025 · Ongoing</span>
+        <span>Satellite imagery source: Google Earth</span>
+      </div>
+    </div>
+    <div class="detail-text">
+      The images focus on the sugarcane system of São Paulo, assembling its spatial links with distant infrastructures at a consistent scale, rendering them commensurable within a single spatial frame.
+    </div>
+  </div>
+  <div class="detail-gallery">
+    <div class="img-placeholder wide" style="background-image:url('assets/img/sugarcane/sugarcane-09.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-04.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-16.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-08.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/sugarcane/sugarcane-05.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-12.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-07.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-15.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-02.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/sugarcane/sugarcane-11.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-06.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-01.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-14.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/sugarcane/sugarcane-13.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-10.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/sugarcane/sugarcane-17.jpg'); background-size:cover; background-position:center;"></div>
+  </div>
+  <div class="gallery-caption">
+    Each piece assembles satellite imagery at a consistent scale — from the sugarcane fields of São Paulo's interior to ports, processing plants, and chemical facilities across continents. Satellite imagery source: Google Earth.
+  </div>
+</section>
+</div>
+
+<!-- DETAIL: A SELVA QUE NOS ESCAPA -->
+<div id="page-detail-selva" class="page">
+<section id="artwork-detail">
+  <a class="back-link" onclick="showPage('artworks')">← Back to Artworks</a>
+  <div class="detail-hero" style="background-image:url('assets/img/selva/selva-04.jpg'); background-size:cover; background-position:center;"></div>
+  <div class="detail-header">
+    <div>
+      <h2>A selva que nos escapa</h2>
+      <div class="detail-meta">
+        <span>Long-term installation & activations</span>
+        <span>Atlantic Forest plants, furniture collected from Mirante do Vale, lighting</span>
+        <span>8 × 9 m · andar43, São Paulo · Since 2020</span>
+        <span>In collaboration with landscape designer Reinaldo Apablaza</span>
+      </div>
+    </div>
+    <div class="detail-text">
+      A living installation where native Atlantic Forest species coexist with office furniture salvaged from the Mirante do Vale building. The pocket jungle unfolds against the mineral vastness of downtown São Paulo, creating a dissonant encounter between urban order and vegetal proliferation.<br><br>
+      <em>Reunião de animais melancólicos</em> — performance in "A selva que nos escapa", with contributions by Kinda Assis (viola), Ismael Marinho (cello), Charly Ho (lighting), Lucas Araújo and Luisa Furtado (production). Andar43, São Paulo, 2021.<br><br>
+      <span style="color:var(--accent); cursor:pointer;" onclick="showPage('project-andar43')">→ More about "andar43" on Projects & Events</span>
+    </div>
+  </div>
+  <div class="detail-gallery">
+    <div class="img-placeholder wide" style="background-image:url('assets/img/selva/selva-03.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/selva/selva-01.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/selva/selva-02.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/selva/selva-05.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/selva/selva-06.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/selva/selva-08.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/selva/selva-07.jpg'); background-size:cover; background-position:center;"></div>
+  </div>
+  <div class="gallery-caption">
+    Photos: Vincent Catala, Tuca Vieira, Roberta, Helena Lima, Felipe Scaldini, Bia Ferreira
+  </div>
+</section>
+</div>
+
+<!-- DETAIL: REWILDING SP -->
+<div id="page-detail-rewilding" class="page">
+<section id="artwork-detail">
+  <a class="back-link" onclick="showPage('artworks')">← Back to Artworks</a>
+  <div class="detail-hero" style="background-image:url('assets/img/rewilding/rewilding-01.jpg'); background-size:cover; background-position:center;"></div>
+  <div class="detail-header">
+    <div>
+      <h2>Rewilding SP</h2>
+      <div class="detail-meta">
+        <span>Digital collage · 2023</span>
+      </div>
+    </div>
+    <div class="detail-text">
+      A speculative reoccupation of the city center. Anhangabaú valley, São Paulo, as a site of ecological return where urban order dissolves into vegetal proliferation.
+    </div>
+  </div>
+  <div class="detail-gallery">
+    <div class="img-placeholder wide" style="background-image:url('assets/img/rewilding/rewilding-01.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="gallery-caption" style="margin-bottom:24px;">Um outro Vale de Anhangabaú possível n°1, series "Rewilding SP", digital collage, 2023. Original photo: André Gomes</div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/rewilding/rewilding-02.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="gallery-caption" style="margin-bottom:0;">Um outro Vale de Anhangabaú possível n°2, series "Rewilding SP", digital collage, 2023. Original photo: Ricardo Yamas</div>
+  </div>
+</section>
+</div>
+
+<!-- DETAIL: OLHOS NOS OLHOS -->
+<div id="page-detail-olhos" class="page">
+<section id="artwork-detail">
+  <a class="back-link" onclick="showPage('artworks')">← Back to Artworks</a>
+  <div class="detail-hero" style="background-image:url('assets/img/olhos/olhos-02.jpg'); background-size:cover; background-position:center;"></div>
+  <div class="detail-header">
+    <div>
+      <h2>Olhos nos olhos</h2>
+      <div class="detail-meta">
+        <span>Installation / Urban intervention</span>
+        <span>Digital images, fabrics, lighting, and interactive devices installed in building windows</span>
+        <span>São Paulo, SP</span>
+        <span>Exhibited at "Virada Cultural de São Paulo", 2023</span>
+      </div>
+    </div>
+    <div class="detail-text">
+      Images appear in windows. They look back.<br>A dispersed dispositif across the city, activating moments of encounter between interior and exterior, observer and observed.
+    </div>
+  </div>
+  <div class="detail-gallery">
+    <div class="img-placeholder wide" style="background-image:url('assets/img/olhos/olhos-01.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-03.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-04.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-05.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/olhos/olhos-06.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-07.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-08.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-09.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-10.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/olhos/olhos-11.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-12.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-13.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-14.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/olhos/olhos-15.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-16.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-17.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-18.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/olhos/olhos-19.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-20.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-21.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-22.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-23.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/olhos/olhos-24.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-25.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-26.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-27.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/olhos/olhos-28.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-29.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-30.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-31.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-32.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/olhos/olhos-33.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-34.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-35.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-36.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/olhos/olhos-37.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-38.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-39.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-40.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-41.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/olhos/olhos-42.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-43.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-44.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-45.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-46.jpg'); background-size:cover; background-position:center;"></div>
+  </div>
+  <div class="gallery-caption">
+    Photo: Daniel Frias
+  </div>
+</section>
+</div>
+
+<!-- DETAIL: UBRIS -->
+<div id="page-detail-ubris" class="page">
+<section id="artwork-detail">
+  <a class="back-link" onclick="showPage('artworks')">← Back to Artworks</a>
+  <div class="detail-hero" style="background-image:url('assets/img/ubris/ubris-18.jpg'); background-size:cover; background-position:center;"></div>
+  <div class="detail-header">
+    <div>
+      <h2>Ubris, des fêtes divines et dérisoires</h2>
+      <div class="detail-meta">
+        <span>Performances / Relational art</span>
+        <span>Site-specific performing parties</span>
+        <span>Abidjan, Côte d'Ivoire · 2015–2018</span>
+      </div>
+    </div>
+    <div class="detail-text">
+      The project unfolds through a series of six performative rave parties. Each explores a dimension of hybris: ambition, transgression, the desire to exceed human limits. Narratives, performances, and scenographies are anchored in specific sites, creating frictions between theme and context. A temporary suspension of order where participants are invited to inhabit, and exhaust, their own excess.<br><br>
+      <a href="https://www.fetesubris.com/" target="_blank" style="color:var(--accent); text-decoration:none; border-bottom:1px solid rgba(200,184,138,0.3);">→ Ubris website</a>
+    </div>
+  </div>
+  <div class="detail-gallery">
+    <div class="img-placeholder wide" style="background-image:url('assets/img/ubris/ubris-07.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-01.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-02.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-03.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/ubris/ubris-09.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-04.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-05.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-08.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-10.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/ubris/ubris-11.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-12.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-13.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-14.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-15.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/ubris/ubris-16.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-17.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-19.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-20.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-21.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/ubris/ubris-22.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-23.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-24.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-25.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-26.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/ubris/ubris-27.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-06.jpg'); background-size:cover; background-position:center;"></div>
+  </div>
+  <div class="gallery-caption">
+    Six performative rave parties — Nocturne au musée, Cyber-pygmées, Divine Vidange, Incitatus, and more. Abidjan, Côte d'Ivoire, 2015–2018.
+  </div>
+</section>
+</div>
+
+<!-- PROJECTS -->
+<div id="page-projects" class="page">
+<section id="projects">
+  <div class="section-label">Projects & Events</div>
+  <div class="section-header">
+    <h2>Projects & Events</h2>
+    <p>Research, spatial experiments, documentaries, and interventions — ongoing and past.</p>
+  </div>
+  <div class="projects-list">
+    <div class="project-row" onclick="showPage('project-sugarcane')" data-covers='["assets/img/sugarcane/sugarcane-03.jpg","assets/img/sugarcane/sugarcane-05.jpg","assets/img/sugarcane/sugarcane-09.jpg","assets/img/sugarcane/sugarcane-07.jpg","assets/img/sugarcane/sugarcane-13.jpg","assets/img/sugarcane/sugarcane-16.jpg","assets/img/sugarcane/sugarcane-04.jpg","assets/img/home/home-1.jpg","assets/img/home/home-2.jpg"]'>
+      <div class="img-placeholder" style="background-image:url('assets/img/home/home-1.jpg'); background-size:cover; background-position:center;"></div>
+      <div class="project-info">
+        <span class="tag">Visual art / Documentary · Since 2024</span>
+        <h3>São Paulo, Cuts through a Sugarcane Plantation</h3>
+        <p>An ongoing visual research exploring sugarcane landscapes as standardized environments — aesthetic, economic, and infrastructural.</p>
+      </div>
+    </div>
+    <div class="project-row" onclick="showPage('project-andar43')" data-covers='["assets/img/selva/selva-01.jpg","assets/img/selva/selva-02.jpg","assets/img/selva/selva-03.jpg","assets/img/selva/selva-04.jpg","assets/img/selva/selva-05.jpg","assets/img/selva/selva-06.jpg","assets/img/selva/selva-07.jpg","assets/img/selva/selva-08.jpg","assets/img/home/home-4.jpg","assets/img/home/home-5.jpg"]'>
+      <div class="img-placeholder" style="background-image:url('assets/img/selva/selva-03.jpg'); background-size:cover; background-position:center;"></div>
+      <div class="project-info">
+        <span class="tag">Experimental space · Since 2020</span>
+        <h3>andar43</h3>
+        <p>A poetic rainforest atop São Paulo. 43rd floor of Mirante do Vale, a former office transformed into a living ecosystem with 100+ native Atlantic Forest species.</p>
+      </div>
+    </div>
+    <div class="project-row" onclick="showPage('project-deriva')">
+      <div class="img-placeholder" style="background: linear-gradient(135deg, #1a1a22 0%, #20252a 100%); display:flex; align-items:center; justify-content:center;"><span style="font:300 11px var(--sans); letter-spacing:2px; text-transform:uppercase; color:var(--text-dim);">Cover photo pending</span></div>
+      <div class="project-info">
+        <span class="tag">Short documentary films · 2020</span>
+        <h3>Deriva "nas entranhas do Mirante"</h3>
+        <p>A series of 4 short documentaries drifting through the corridors of Mirante do Vale — Brazil's tallest building for over fifty years.</p>
+      </div>
+    </div>
+    <div class="project-row" onclick="showPage('project-juntos')">
+      <div class="img-placeholder" style="background: linear-gradient(135deg, #22181a 0%, #2a2020 100%); display:flex; align-items:center; justify-content:center;"><span style="font:300 11px var(--sans); letter-spacing:2px; text-transform:uppercase; color:var(--text-dim);">Cover photo pending</span></div>
+      <div class="project-info">
+        <span class="tag">Memory plaques · 2020</span>
+        <h3>Juntos no efêmero</h3>
+        <p>Proposal of memory plaques for the Inventário da Memória Paulistana — a situated, subjective approach to memory that embraces the transient nature of urban experience.</p>
+      </div>
+    </div>
+    <div class="project-row" onclick="showPage('project-ubris')" data-covers='["assets/img/ubris/ubris-01.jpg","assets/img/ubris/ubris-05.jpg","assets/img/ubris/ubris-07.jpg","assets/img/ubris/ubris-09.jpg","assets/img/ubris/ubris-11.jpg","assets/img/ubris/ubris-14.jpg","assets/img/ubris/ubris-18.jpg","assets/img/ubris/ubris-22.jpg","assets/img/ubris/ubris-27.jpg"]'>
+      <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-18.jpg'); background-size:cover; background-position:center;"></div>
+      <div class="project-info">
+        <span class="tag">Site-specific parties · 2015–2017</span>
+        <h3>Ubris, des fêtes divines et dérisoires</h3>
+        <p>Six performative rave parties in Abidjan, Côte d'Ivoire. Each explores a dimension of hybris — ambition, transgression, the desire to exceed human limits.</p>
+      </div>
+    </div>
+    <div class="project-row" onclick="showPage('project-tkfr')">
+      <div class="img-placeholder" style="background: linear-gradient(135deg, #1a1520 0%, #25182a 100%); display:flex; align-items:center; justify-content:center;"><span style="font:300 11px var(--sans); letter-spacing:2px; text-transform:uppercase; color:var(--text-dim);">Cover photo pending</span></div>
+      <div class="project-info">
+        <span class="tag">Rave parties · 2013–2014</span>
+        <h3>TKFR</h3>
+        <p>Lost rave parties, staged under absurd pretexts. Five raves held across various locations in northern Tunisia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- PROJECT: SUGARCANE PLANTATION -->
+<div id="page-project-sugarcane" class="page">
+<section id="artwork-detail">
+  <a class="back-link" onclick="showPage('projects')">← Back to Projects</a>
+  <div class="detail-hero" style="background-image:url('assets/img/home/home-1.jpg'); background-size:cover; background-position:center;"></div>
+  <div class="detail-header">
+    <div>
+      <h2>Cuts through a Sugarcane Plantation</h2>
+      <div class="detail-meta">
+        <span>Visual art / Documentary</span>
+        <span>Since 2024 · Work in progress</span>
+      </div>
+    </div>
+    <div class="detail-text">
+      This body of work explores the sugarcane landscapes of São Paulo as a form of standardized environment — at once aesthetic, economic, and infrastructural. These vast monocultures, shaped by centuries of colonial and industrial logics, produce a paradoxical visual experience: hypnotic, repetitive, almost soothing, yet deeply tied to extraction, control, and large-scale transformation of land. The work seeks to hold this tension, approaching the landscape both as image and as system.<br><br>
+      The research unfolds through a combination of fieldwork, photography, drone footage, and satellite image composition, often recombined into speculative visual constructs. Moving between ground-level immersion and distant, cartographic views, the methodology echoes a shift in scale — from embodied perception to systemic abstraction. This research questions how such territories are seen, "artialized", and ultimately naturalized.
+    </div>
+  </div>
+  <div class="detail-gallery">
+    <div class="img-placeholder wide" style="background-image:url('assets/img/sugarcane/sugarcane-03.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/home/home-1.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/home/home-2.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-09.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/sugarcane/sugarcane-04.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-05.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-16.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-08.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-12.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/sugarcane/sugarcane-07.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-15.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-02.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-11.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/sugarcane/sugarcane-06.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-14.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-01.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-10.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-13.jpg'); background-size:cover; background-position:center;"></div>
+  </div>
+</section>
+</div>
+
+<!-- PROJECT: ANDAR43 -->
+<div id="page-project-andar43" class="page">
+<section id="artwork-detail">
+  <a class="back-link" onclick="showPage('projects')">← Back to Projects</a>
+  <div class="detail-hero" style="background-image:url('assets/img/selva/selva-03.jpg'); background-size:cover; background-position:center;"></div>
+  <div class="detail-header">
+    <div>
+      <h2>andar43: a poetic rainforest atop São Paulo</h2>
+      <div class="detail-meta">
+        <span>Experimental space / Immersive installation / Event venue</span>
+        <span>Since 2020</span>
+        <span>43rd floor, Mirante do Vale, São Paulo</span>
+      </div>
+    </div>
+    <div class="detail-text">
+      Installed on the 43rd floor of the Mirante do Vale, andar43 transforms a former office into a living, evolving ecosystem. More than 100 native Atlantic Forest species coexist with office furniture salvaged from within the building itself — desks, cabinets, and partitions recovered from vacated units as they are dismantled and converted into housing, then reassembled into a fragile, hybrid architecture.<br><br>
+      This pocket jungle unfolds against the mineral vastness of downtown São Paulo, creating a dissonant encounter between urban order and vegetal proliferation. Inspired by Anna Tsing and Donna Haraway, the project explores how life re-emerges within abandoned infrastructures.<br><br>
+      Over time, andar43 has hosted exhibitions, performances, children's workshops, gardening sessions, and culinary experiences centered on Brazilian Atlantic Forest ingredients. These activations extend and intensify the installation <em>A selva que nos escapa</em>, turning the space into a platform for collective experimentation.<br><br>
+      Before <em>A selva que nos escapa</em>, the space was first inhabited through another poetic intervention, <em>Três paus, três redes, o fogo</em>, selected from a micro-architecture competition titled <em>O monstro que comia sementes</em>, which invited proposals imagining possible transformations of the site.
+    </div>
+  </div>
+  <div class="detail-gallery">
+    <div class="img-placeholder wide" style="background-image:url('assets/img/selva/selva-04.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/selva/selva-01.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/selva/selva-02.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/selva/selva-05.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/selva/selva-06.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/selva/selva-08.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/selva/selva-07.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/home/home-4.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/home/home-3.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/home/home-5.jpg'); background-size:cover; background-position:center;"></div>
+  </div>
+  <div class="gallery-caption">
+    Photos: Vincent Catala, Tuca Vieira, Helena Lima, Felipe Scaldini, Bia Ferreira, Daniel Frias
+  </div>
+</section>
+</div>
+
+<!-- PROJECT: UBRIS -->
+<div id="page-project-ubris" class="page">
+<section id="artwork-detail">
+  <a class="back-link" onclick="showPage('projects')">← Back to Projects</a>
+  <div class="detail-hero" style="background-image:url('assets/img/ubris/ubris-18.jpg'); background-size:cover; background-position:center;"></div>
+  <div class="detail-header">
+    <div>
+      <h2>Ubris, des fêtes divines et dérisoires</h2>
+      <div class="detail-meta">
+        <span>Site-specific performative parties</span>
+        <span>2015–2017</span>
+        <span>Abidjan, Côte d'Ivoire</span>
+      </div>
+    </div>
+    <div class="detail-text">
+      Six performative rave parties, each exploring a dimension of hybris — ambition, transgression, the desire to exceed human limits. Narratives, performances, and scenographies are anchored in specific sites across Abidjan, creating frictions between theme and context. Each event is a temporary suspension of order, an invitation for participants to inhabit and exhaust their own excess.<br><br>
+      The parties — Nocturne au musée, Cyber-pygmées, Divine Vidange, Incitatus, and others — weave together music, costumes, spatial interventions, and collective rituals. They unfold in venues chosen for their symbolic resonance: a museum after dark, an industrial warehouse, an abandoned villa. Each site becomes a stage for excess and catharsis, where the boundaries between performer and audience dissolve.<br><br>
+      Ubris sits at the crossroads of relational art, performance, and nightlife culture. It questions the rave as a form of contemporary ritual — an arena where bodies, sounds, and spaces collide to produce something both divine and absurd.<br><br>
+      <a href="https://www.fetesubris.com/" target="_blank" style="color:var(--accent); text-decoration:none; border-bottom:1px solid rgba(200,184,138,0.3);">→ Ubris website</a>
+    </div>
+  </div>
+  <div class="detail-gallery">
+    <div class="img-placeholder wide" style="background-image:url('assets/img/ubris/ubris-01.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-02.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-03.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-04.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/ubris/ubris-05.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-06.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-07.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-08.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/ubris/ubris-09.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-10.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-11.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-12.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-13.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/ubris/ubris-14.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-15.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-16.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-17.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/ubris/ubris-19.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-20.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-21.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-22.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/ubris/ubris-23.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-24.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-25.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-26.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="img-placeholder wide" style="background-image:url('assets/img/ubris/ubris-27.jpg'); background-size:cover; background-position:center;"></div>
+  </div>
+  <div class="gallery-caption">
+    Six performative rave parties — Nocturne au musée, Cyber-pygmées, Divine Vidange, Incitatus, and more. Abidjan, Côte d'Ivoire, 2015–2017.
+  </div>
+</section>
+</div>
+
+<!-- PROJECT: DERIVA -->
+<div id="page-project-deriva" class="page">
+<section id="artwork-detail">
+  <a class="back-link" onclick="showPage('projects')">← Back to Projects</a>
+  <div class="detail-hero" style="background: linear-gradient(135deg, #1a1a22 0%, #20252a 100%); display:flex; align-items:center; justify-content:center; min-height:50vh;"><span style="font:300 13px var(--sans); letter-spacing:2px; text-transform:uppercase; color:var(--text-dim);">Cover image pending</span></div>
+  <div class="detail-header">
+    <div>
+      <h2>Deriva "nas entranhas do Mirante"</h2>
+      <div class="detail-meta">
+        <span>A series of 4 short documentary films</span>
+        <span>São Paulo, 2020</span>
+      </div>
+    </div>
+    <div class="detail-text">
+      A drift through the corridors of Mirante do Vale, a downtown São Paulo building that stood as Brazil's tallest for over fifty years. Sensitive exchanges with occupants, workers, investors, architects, and residents reveal a structure suspended between ruin and renewal.<br><br>
+      Inspired by participatory inventory methods, the narratives are co-constructed with long-time users, whose voices shape the building's living archive.
+    </div>
+  </div>
+  <div style="padding:0 40px 60px; display:flex; flex-direction:column; gap:32px;">
+    <div style="background:var(--bg-secondary); border-radius:8px; padding:24px;">
+      <h4 style="font:400 16px var(--serif); color:var(--text); margin-bottom:12px;">Edifício Mirante do Vale — primeiro passeio pelos andares</h4>
+      <p style="font:300 13px var(--sans); color:var(--text-muted); margin-bottom:12px;">Film, 5 min, 2020</p>
+      <a href="https://www.youtube.com/watch?v=BdTIn6mVxZU" target="_blank" style="color:var(--accent); font:300 13px var(--sans); text-decoration:none;">▶ Watch on YouTube</a>
+    </div>
+    <div style="background:var(--bg-secondary); border-radius:8px; padding:24px;">
+      <h4 style="font:400 16px var(--serif); color:var(--text); margin-bottom:12px;">Mirante do Vale, o prédio que dava golpes!</h4>
+      <p style="font:300 13px var(--sans); color:var(--text-muted); margin-bottom:12px;">Film, 7 min, 2020</p>
+      <a href="https://www.youtube.com/watch?v=p8BDn0iRSAI" target="_blank" style="color:var(--accent); font:300 13px var(--sans); text-decoration:none;">▶ Watch on YouTube</a>
+    </div>
+    <div style="background:var(--bg-secondary); border-radius:8px; padding:24px;">
+      <h4 style="font:400 16px var(--serif); color:var(--text); margin-bottom:12px;">O edifício Mirante do Vale é lindo ou feio?</h4>
+      <p style="font:300 13px var(--sans); color:var(--text-muted); margin-bottom:12px;">Film, 5 min, 2020</p>
+      <a href="https://www.youtube.com/watch?v=6r_bypQZ7mA" target="_blank" style="color:var(--accent); font:300 13px var(--sans); text-decoration:none;">▶ Watch on YouTube</a>
+    </div>
+    <div style="background:var(--bg-secondary); border-radius:8px; padding:24px;">
+      <h4 style="font:400 16px var(--serif); color:var(--text); margin-bottom:12px;">O Mirante do Vale — prédio mutante</h4>
+      <p style="font:300 13px var(--sans); color:var(--text-muted); margin-bottom:12px;">Film, 10 min, 2020</p>
+      <a href="https://www.youtube.com/watch?v=AIbiRfnM0vg" target="_blank" style="color:var(--accent); font:300 13px var(--sans); text-decoration:none;">▶ Watch on YouTube</a>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- PROJECT: JUNTOS NO EFÊMERO -->
+<div id="page-project-juntos" class="page">
+<section id="artwork-detail">
+  <a class="back-link" onclick="showPage('projects')">← Back to Projects</a>
+  <div class="detail-hero" style="background: linear-gradient(135deg, #22181a 0%, #2a2020 100%); display:flex; align-items:center; justify-content:center; min-height:50vh;"><span style="font:300 13px var(--sans); letter-spacing:2px; text-transform:uppercase; color:var(--text-dim);">Cover image pending</span></div>
+  <div class="detail-header">
+    <div>
+      <h2>Juntos no efêmero</h2>
+      <div class="detail-meta">
+        <span>Proposal of memory plaques</span>
+        <span>Inventário da Memória Paulistana</span>
+        <span>São Paulo, 2020</span>
+      </div>
+    </div>
+    <div class="detail-text">
+      The "Memory Plaques" competition was launched in 2019 by São Paulo's Department of Historical Heritage as part of the Inventário Memória Paulistana, an initiative aimed at identifying and safeguarding places significant to the city's collective memory and to the diverse social groups that shape it. Participants were invited to propose short entries (verbetes) — concise narratives to be inscribed on plaques installed in public space, each capturing a fragment of urban memory.<br><br>
+      My contribution focused on sites that fall outside of official or monumental history, engaging instead with more fragile, everyday, or overlooked narratives. The texts deliberately avoided academic language, seeking to convey the singular tone and lived atmosphere of each place. Titled <em>Juntos no efêmero</em> (Together in the Ephemeral), the project proposes a situated, subjective approach to memory, one that resists fixation and embraces the transient nature of urban experience.<br><br>
+      Three out of six proposals were approved by the jury of the competition.
+    </div>
+  </div>
+  <div style="padding:0 40px 60px;">
+    <p style="color:var(--text-dim); font-style:italic; font-size:13px; padding:16px; border:1px dashed rgba(136,136,136,0.3); border-radius:4px;">⚠ Photo carousel and PDF document pending — waiting for assets from Charly.</p>
+  </div>
+</section>
+</div>
+
+<!-- PROJECT: TKFR -->
+<div id="page-project-tkfr" class="page">
+<section id="artwork-detail">
+  <a class="back-link" onclick="showPage('projects')">← Back to Projects</a>
+  <div class="detail-hero" style="background: linear-gradient(135deg, #1a1520 0%, #25182a 100%); display:flex; align-items:center; justify-content:center; min-height:50vh;"><span style="font:300 13px var(--sans); letter-spacing:2px; text-transform:uppercase; color:var(--text-dim);">Cover image pending</span></div>
+  <div class="detail-header">
+    <div>
+      <h2>TKFR</h2>
+      <div class="detail-meta">
+        <span>Lost rave parties, staged under absurd pretexts</span>
+        <span>Tunisia, 2013–2014</span>
+      </div>
+    </div>
+    <div class="detail-text">
+      Five raves held across various locations in northern Tunisia between 2013 and 2014. Lost rave parties, staged under absurd pretexts — each event a fleeting, site-responsive experiment in collective energy and spatial transgression.<br><br>
+      Poster design by Chloé Msset.
+    </div>
+  </div>
+  <div style="padding:0 40px 60px;">
+    <p style="color:var(--text-dim); font-style:italic; font-size:13px; padding:16px; border:1px dashed rgba(136,136,136,0.3); border-radius:4px;">⚠ Photo carousel pending — waiting for assets from Charly.</p>
+  </div>
+</section>
+</div>
+
+<!-- ABOUT -->
+<div id="page-about" class="page">
+<section id="about">
+  <div class="section-label">About</div>
+  <div class="about-layout">
+    <div class="about-portrait img-placeholder" style="background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px;">
+      <span style="font:300 32px var(--serif); color:var(--text-dim);">📷</span>
+      <span style="font:300 11px var(--sans); letter-spacing:2px; text-transform:uppercase; color:var(--text-dim);">Portrait pending</span>
+    </div>
+    <div class="about-content">
+      <h2>Charly Andral Osbourne</h2>
+      <p>Visual artist and spatial researcher based in São Paulo, Brazil. Working across digital collage, installation, performance, and documentary, his practice explores the tensions between ecological systems, urban infrastructure, and collective memory.</p>
+      <p>His work often operates at the intersection of landscape and politics — examining how territories are shaped, perceived, and naturalized through extraction, monoculture, and colonial logics. Central to his approach is a commitment to site-specific engagement, participatory processes, and the activation of overlooked spaces.</p>
+      <p>Since 2020, he has been developing andar43, an experimental space on the 43rd floor of the Mirante do Vale building in downtown São Paulo — a poetic rainforest where native Atlantic Forest species coexist with salvaged office furniture.</p>
+      <p style="color:var(--text-dim); font-style:italic; font-size:13px; margin-top:16px; padding:16px; border:1px dashed rgba(136,136,136,0.3); border-radius:4px;">⚠ Bio text is a placeholder — waiting for Charly's final bio, education, exhibitions list, and selected press.</p>
+      <div class="about-contact">
+        <h4>Contact</h4>
+        <a href="#">charlyandral@email.com</a>
+        <a href="#">Instagram</a>
+        <a href="#">andar43.com</a>
+        <p style="color:var(--text-dim); font-style:italic; font-size:12px; margin-top:8px;">↑ Placeholder links — waiting for real contact details</p>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<footer>
+  <span>© 2026 Charly Andral Osbourne</span>
+  <span>São Paulo, Brazil</span>
+</footer>
+
+<script>
+  // Home slideshow
+  (function() {
+    const slides = document.querySelectorAll('.home-slide');
+    let i = 0;
+    setInterval(() => {
+      slides[i].classList.remove('active');
+      i = (i + 1) % slides.length;
+      slides[i].classList.add('active');
+    }, 5000);
+  })();
+
+  // Randomize featured artwork
+  function randomizeFeatured() {
+    const cards = document.querySelectorAll('#page-artworks .artwork-card');
+    cards.forEach(c => c.classList.remove('featured'));
+    const random = Math.floor(Math.random() * cards.length);
+    cards[random].classList.add('featured');
+  }
+  randomizeFeatured();
+
+  // Randomize project cover photos
+  function randomizeProjectCovers() {
+    document.querySelectorAll('#page-projects .project-row[data-covers]').forEach(row => {
+      const covers = JSON.parse(row.getAttribute('data-covers'));
+      const randomImg = covers[Math.floor(Math.random() * covers.length)];
+      const placeholder = row.querySelector('.img-placeholder');
+      placeholder.style.backgroundImage = "url('" + randomImg + "')";
+      placeholder.style.backgroundSize = 'cover';
+      placeholder.style.backgroundPosition = 'center';
+      placeholder.innerHTML = '';
+    });
+  }
+  randomizeProjectCovers();
+
+  function showPage(pageId) {
+    if (pageId === 'artworks') randomizeFeatured();
+    if (pageId === 'projects') randomizeProjectCovers();
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + pageId).classList.add('active');
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    const navId = pageId.replace('artwork-detail','artworks').replace(/^detail-.*/,'artworks').replace(/^project-.*/,'projects');
+    const navLink = document.getElementById('nav-' + navId);
+    if (navLink) navLink.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  window.addEventListener('scroll', () => {
+    document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 50);
+  });
+</script>
+</body>
+</html>
