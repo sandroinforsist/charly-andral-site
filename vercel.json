@@ -1,6 +1,10 @@
 {
+  "trailingSlash": false,
   "rewrites": [
-    { "source": "/assets/(.*)", "destination": "/assets/$1" },
-    { "source": "/((?!assets/).*)", "destination": "/index.html" }
+    { "source": "/artworks", "destination": "/index.html" },
+    { "source": "/artworks/:path*", "destination": "/index.html" },
+    { "source": "/projects", "destination": "/index.html" },
+    { "source": "/projects/:path*", "destination": "/index.html" },
+    { "source": "/about", "destination": "/index.html" }
   ]
 }
