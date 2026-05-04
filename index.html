@@ -21,7 +21,7 @@
 <meta name="twitter:description" content="Visual artist and spatial researcher based in São Paulo. Working across digital collage, installation, performance, and documentary.">
 <meta name="twitter:image" content="https://charly-andral-site.vercel.app/assets/img/home/home-1.jpg">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap');
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -32,7 +32,7 @@
     --text-muted: #888;
     --text-dim: #555;
     --accent: #c8b88a;
-    --serif: 'Cormorant Garamond', Georgia, serif;
+    --serif: 'Poppins', -apple-system, sans-serif;
     --sans: 'Inter', -apple-system, sans-serif;
     --transition: 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
   }
@@ -147,47 +147,126 @@
   }
 
   .artworks-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+    display: flex; flex-direction: column; gap: 80px;
+    max-width: 900px; margin: 0 auto;
   }
   .artwork-card {
-    position: relative; overflow: hidden; cursor: pointer; aspect-ratio: 4/3;
+    cursor: pointer; opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
   }
-  .artwork-card .img-placeholder { width: 100%; height: 100%; transition: transform 0.8s cubic-bezier(0.25,0.1,0.25,1); }
-  .artwork-card:hover .img-placeholder { transform: scale(1.05); }
-  .artwork-card .overlay {
-    position: absolute; inset: 0; display: flex; flex-direction: column;
-    justify-content: flex-end; padding: 24px;
-    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
-    opacity: 0; transition: opacity 0.5s;
+  .artwork-card.visible {
+    opacity: 1; transform: translateY(0);
   }
-  .artwork-card:hover .overlay { opacity: 1; }
-  .artwork-card .overlay h3 {
-    font: 400 18px var(--serif); letter-spacing: 1px; margin-bottom: 4px;
+  .artwork-card img {
+    width: 100%; height: auto; display: block;
+    transition: transform 0.6s cubic-bezier(0.25,0.1,0.25,1), filter 0.6s;
   }
-  .artwork-card .overlay span {
-    font: 300 11px var(--sans); color: var(--text-muted); letter-spacing: 1px;
+  .artwork-card:hover img { transform: scale(1.02); filter: brightness(1.08); }
+  .artwork-card .artwork-info {
+    padding: 20px 0 0;
   }
-  .artwork-card.featured {
-    grid-column: 1 / 3; grid-row: 1 / 3; aspect-ratio: auto;
+  .artwork-card .artwork-info h3 {
+    font: 500 20px var(--serif); letter-spacing: 0.5px; margin-bottom: 6px;
+    color: var(--text); transition: color 0.3s;
+  }
+  .artwork-card:hover .artwork-info h3 { color: var(--accent); }
+  .artwork-card .artwork-info span {
+    font: 300 12px var(--sans); color: var(--text-muted); letter-spacing: 1px;
   }
 
-  #artwork-detail { padding: 140px 40px 80px; }
-  .detail-hero { width: 100%; aspect-ratio: 21/9; margin-bottom: 48px; }
-  .detail-header {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 80px;
+  .artwork-detail-section { padding: 140px 40px 80px; }
+
+  /* Carousel */
+  .detail-carousel {
+    position: relative; max-width: 900px; margin: 0 auto 48px; user-select: none;
   }
-  .detail-header h2 { font: 300 42px var(--serif); letter-spacing: 2px; margin-bottom: 16px; }
-  .detail-meta { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
+  .carousel-viewport { overflow: hidden; border-radius: 2px; }
+  .carousel-track {
+    display: flex; transition: transform 0.45s cubic-bezier(0.25,0.1,0.25,1);
+  }
+  .carousel-slide {
+    min-width: 100%; display: flex; flex-direction: column; align-items: center;
+  }
+  .carousel-slide img {
+    width: 100%; height: auto; display: block; cursor: pointer;
+  }
+  .carousel-caption {
+    width: 100%; text-align: center; padding: 10px 16px 0;
+    font: italic 300 12px var(--serif); color: var(--text-dim); letter-spacing: 0.3px;
+    min-height: 1.6em;
+  }
+  .carousel-prev, .carousel-next {
+    position: absolute; top: 0; bottom: 40px; width: 54px;
+    background: none; border: none; color: rgba(255,255,255,0.4);
+    font-size: 40px; cursor: pointer; z-index: 2;
+    display: flex; align-items: center; justify-content: center;
+    transition: color 0.3s, background 0.3s;
+  }
+  .carousel-prev:hover, .carousel-next:hover {
+    color: rgba(255,255,255,0.9); background: rgba(0,0,0,0.3);
+  }
+  .carousel-prev { left: 0; }
+  .carousel-next { right: 0; }
+  .carousel-dots {
+    display: flex; justify-content: center; gap: 8px; padding: 16px 0 0;
+    flex-wrap: wrap;
+  }
+  .carousel-dots .dot {
+    width: 8px; height: 8px; border-radius: 50%; border: none; padding: 0;
+    background: var(--text-dim); cursor: pointer; transition: background 0.3s, transform 0.3s;
+  }
+  .carousel-dots .dot.active {
+    background: var(--accent); transform: scale(1.25);
+  }
+
+  /* Detail info below carousel */
+  .detail-info {
+    max-width: 700px; margin: 0 auto; text-align: left;
+  }
+  .detail-info h2 {
+    font: 300 42px var(--serif); letter-spacing: 2px; margin-bottom: 16px;
+  }
+  .detail-meta { display: flex; flex-direction: column; gap: 6px; margin-bottom: 24px; }
   .detail-meta span { font: 300 12px var(--sans); color: var(--text-muted); letter-spacing: 1px; }
   .detail-text {
-    font: 300 15px var(--sans); line-height: 1.8; color: var(--text-muted); max-width: 480px;
+    font: 300 15px var(--sans); line-height: 1.8; color: var(--text-muted);
   }
-  .detail-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
-  .detail-gallery .img-placeholder { aspect-ratio: 1; }
-  .detail-gallery .img-placeholder.wide { grid-column: span 2; aspect-ratio: 2/1; }
-  .gallery-caption {
-    padding: 12px 0; font: italic 300 12px var(--serif); color: var(--text-dim); letter-spacing: 0.5px;
+  .detail-text a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(200,184,138,0.3); }
+  .detail-credits {
+    margin-top: 20px; font: italic 300 12px var(--serif); color: var(--text-dim); letter-spacing: 0.5px;
   }
+
+  /* Lightbox */
+  .lightbox-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(0,0,0,0.95); display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s;
+  }
+  .lightbox-overlay.active { opacity: 1; pointer-events: all; }
+  .lightbox-overlay img {
+    max-width: 90vw; max-height: 90vh; object-fit: contain;
+  }
+  .lightbox-close {
+    position: absolute; top: 20px; right: 24px;
+    background: none; border: none; color: #fff; font-size: 36px;
+    cursor: pointer; z-index: 10; line-height: 1; opacity: 0.7; transition: opacity 0.3s;
+  }
+  .lightbox-close:hover { opacity: 1; }
+  .lightbox-prev, .lightbox-next {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: none; border: none; color: rgba(255,255,255,0.6);
+    font-size: 48px; cursor: pointer; z-index: 10; padding: 16px;
+    transition: color 0.3s;
+  }
+  .lightbox-prev:hover, .lightbox-next:hover { color: #fff; }
+  .lightbox-prev { left: 12px; }
+  .lightbox-next { right: 12px; }
+  .lightbox-caption {
+    position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+    font: italic 300 13px var(--serif); color: rgba(255,255,255,0.6);
+    text-align: center; max-width: 80vw;
+  }
+
   .back-link {
     display: inline-flex; align-items: center; gap: 8px;
     font: 300 12px var(--sans); letter-spacing: 1.5px; text-transform: uppercase;
@@ -195,6 +274,19 @@
     transition: color 0.3s; cursor: pointer;
   }
   .back-link:hover { color: var(--text); }
+
+  /* Legacy detail layout (used by project pages) */
+  .detail-hero { width: 100%; aspect-ratio: 21/9; margin-bottom: 48px; }
+  .detail-header {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 80px;
+  }
+  .detail-header h2 { font: 300 42px var(--serif); letter-spacing: 2px; margin-bottom: 16px; }
+  .detail-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .detail-gallery .img-placeholder { aspect-ratio: 1; }
+  .detail-gallery .img-placeholder.wide { grid-column: span 2; aspect-ratio: 2/1; }
+  .gallery-caption {
+    padding: 12px 0; font: italic 300 12px var(--serif); color: var(--text-dim); letter-spacing: 0.5px;
+  }
 
   #projects { padding: 140px 40px 80px; background: var(--bg-secondary); }
   .projects-list { display: flex; flex-direction: column; gap: 0; }
@@ -261,11 +353,17 @@
 
   @media (max-width: 768px) {
     .home-title { font-size: 36px; letter-spacing: 3px; }
-    .artworks-grid { grid-template-columns: 1fr; gap: 4px; }
-    .artwork-card.featured { grid-column: auto; grid-row: auto; }
-    .artwork-card { aspect-ratio: 16/10; }
-    .artwork-card .overlay { opacity: 1; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 70%); }
-    .artwork-card .overlay h3 { font-size: 16px; }
+    .artworks-grid { gap: 48px; }
+    .artwork-card .artwork-info h3 { font-size: 17px; }
+    .artwork-card .artwork-info span { font-size: 11px; }
+    .artwork-detail-section { padding: 100px 16px 60px; }
+    .detail-carousel { margin-bottom: 32px; }
+    .carousel-prev, .carousel-next { width: 40px; font-size: 28px; }
+    .detail-info h2 { font-size: 28px; }
+    .carousel-dots .dot { width: 6px; height: 6px; }
+    .lightbox-prev, .lightbox-next { font-size: 32px; padding: 8px; }
+    .lightbox-prev { left: 4px; }
+    .lightbox-next { right: 4px; }
     .detail-header { grid-template-columns: 1fr; gap: 32px; }
     .detail-header h2 { font-size: 28px; }
     .detail-gallery { grid-template-columns: repeat(2, 1fr); }
@@ -306,10 +404,7 @@
     <div class="home-slide" style="background-image:url('assets/img/home/home-5.jpg')"></div>
   </div>
   <div class="home-dim"></div>
-  <div class="home-content">
-    <h1 class="home-title">Charly<br>Andral</h1>
-    <p class="home-subtitle">Visual artist · São Paulo</p>
-    <a class="home-enter" onclick="showPage('artworks')">Enter</a>
+  <div class="home-content" style="display:none;">
   </div>
   <div class="scroll-hint">
     <span>Scroll</span>
@@ -328,50 +423,45 @@
   </div>
   <div class="artworks-grid">
     <div class="artwork-card" onclick="showPage('artwork-detail')">
-      <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-03.jpg'); background-size:cover; background-position:center;">
-      </div>
-      <div class="overlay">
+      <img src="assets/img/sugarcane/sugarcane-03.jpg" alt="Cuts through a Sugarcane Archipelago" loading="lazy">
+      <div class="artwork-info">
         <h3>Cuts through a Sugarcane Archipelago (at scale)</h3>
         <span>Since 2024 · Digital collage · Ongoing</span>
       </div>
     </div>
     <div class="artwork-card" onclick="showPage('detail-selva')">
-      <div class="img-placeholder" style="background-image:url('assets/img/selva/selva-04.jpg'); background-size:cover; background-position:center;">
-      </div>
-      <div class="overlay">
+      <img src="assets/img/selva/selva-04.jpg" alt="A selva que nos escapa" loading="lazy">
+      <div class="artwork-info">
         <h3>A selva que nos escapa</h3>
         <span>Since 2020 · Habitable installation · Performances</span>
       </div>
     </div>
     <div class="artwork-card" onclick="showPage('detail-rewilding')">
-      <div class="img-placeholder" style="background-image:url('assets/img/rewilding/rewilding-01.jpg'); background-size:cover; background-position:center;">
-      </div>
-      <div class="overlay">
+      <img src="assets/img/rewilding/rewilding-01.jpg" alt="Rewilding SP" loading="lazy">
+      <div class="artwork-info">
         <h3>Rewilding SP</h3>
         <span>2023 · Digital collage</span>
       </div>
     </div>
     <div class="artwork-card" onclick="showPage('detail-olhos')">
-      <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-02.jpg'); background-size:cover; background-position:center;">
-      </div>
-      <div class="overlay">
+      <img src="assets/img/olhos/olhos-02.jpg" alt="Olhos nos olhos" loading="lazy">
+      <div class="artwork-info">
         <h3>Olhos nos olhos</h3>
         <span>2023 · Installation · Urban intervention</span>
       </div>
     </div>
     <div class="artwork-card" onclick="showPage('detail-ubris')">
-      <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-18.jpg'); background-size:cover; background-position:center;">
-      </div>
-      <div class="overlay">
+      <img src="assets/img/ubris/ubris-18.jpg" alt="Ubris, des fêtes divines et dérisoires" loading="lazy">
+      <div class="artwork-info">
         <h3>Ubris, des fêtes divines et dérisoires</h3>
         <span>2015–2018 · Performances · Relational art</span>
       </div>
     </div>
     <div class="artwork-card">
-      <div class="img-placeholder" style="background: linear-gradient(135deg, #1a1520 0%, #25182a 60%, #15101a 100%); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:6px;">
+      <div style="background: linear-gradient(135deg, #1a1520 0%, #25182a 60%, #15101a 100%); display:flex; align-items:center; justify-content:center; min-height: 300px;">
         <span style="font:300 11px var(--sans); letter-spacing:2px; text-transform:uppercase; color:var(--text-dim);">Photo pending</span>
       </div>
-      <div class="overlay">
+      <div class="artwork-info">
         <h3>Oxymoron Suits (S.A.P.E.)</h3>
         <span>2015–2018 · Wax fabric garment · Clothing design</span>
       </div>
@@ -380,230 +470,250 @@
 </section>
 </div>
 
-<!-- ARTWORK DETAIL -->
+<!-- ARTWORK DETAIL: SUGARCANE -->
 <div id="page-artwork-detail" class="page">
-<section id="artwork-detail">
+<section class="artwork-detail-section">
   <a class="back-link" onclick="showPage('artworks')">← Back to Artworks</a>
-  <div class="detail-hero" style="background-image:url('assets/img/sugarcane/sugarcane-03.jpg'); background-size:cover; background-position:center;"></div>
-  <div class="detail-header">
-    <div>
-      <h2>Cuts through a Sugarcane Archipelago (at scale)</h2>
-      <div class="detail-meta">
-        <span>Digital collage · Various formats</span>
-        <span>2024 / 2025 · Ongoing</span>
-        <span>Satellite imagery source: Google Earth</span>
+
+  <div class="detail-carousel" id="carousel-sugarcane">
+    <div class="carousel-viewport">
+      <div class="carousel-track">
+        <div class="carousel-slide"><img src="assets/img/sugarcane/sugarcane-01.jpg" alt="Sugarcane 01" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Cuts through a Sugarcane Archipelago (at scale)</div></div>
+        <div class="carousel-slide"><img src="assets/img/sugarcane/sugarcane-02.jpg" alt="Sugarcane 02" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Cuts through a Sugarcane Archipelago (at scale)</div></div>
+        <div class="carousel-slide"><img src="assets/img/sugarcane/sugarcane-03.jpg" alt="Sugarcane 03" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Cuts through a Sugarcane Archipelago (at scale)</div></div>
+        <div class="carousel-slide"><img src="assets/img/sugarcane/sugarcane-04.jpg" alt="Sugarcane 04" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Cuts through a Sugarcane Archipelago (at scale)</div></div>
+        <div class="carousel-slide"><img src="assets/img/sugarcane/sugarcane-05.jpg" alt="Sugarcane 05" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Cuts through a Sugarcane Archipelago (at scale)</div></div>
+        <div class="carousel-slide"><img src="assets/img/sugarcane/sugarcane-06.jpg" alt="Sugarcane 06" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Cuts through a Sugarcane Archipelago (at scale)</div></div>
+        <div class="carousel-slide"><img src="assets/img/sugarcane/sugarcane-07.jpg" alt="Sugarcane 07" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Cuts through a Sugarcane Archipelago (at scale)</div></div>
+        <div class="carousel-slide"><img src="assets/img/sugarcane/sugarcane-08.jpg" alt="Sugarcane 08" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Cuts through a Sugarcane Archipelago (at scale)</div></div>
+        <div class="carousel-slide"><img src="assets/img/sugarcane/sugarcane-09.jpg" alt="Sugarcane 09" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Cuts through a Sugarcane Archipelago (at scale)</div></div>
+        <div class="carousel-slide"><img src="assets/img/sugarcane/sugarcane-10.jpg" alt="Sugarcane 10" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Cuts through a Sugarcane Archipelago (at scale)</div></div>
+        <div class="carousel-slide"><img src="assets/img/sugarcane/sugarcane-11.jpg" alt="Sugarcane 11" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Cuts through a Sugarcane Archipelago (at scale)</div></div>
+        <div class="carousel-slide"><img src="assets/img/sugarcane/sugarcane-12.jpg" alt="Sugarcane 12" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Cuts through a Sugarcane Archipelago (at scale)</div></div>
+        <div class="carousel-slide"><img src="assets/img/sugarcane/sugarcane-13.jpg" alt="Sugarcane 13" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Cuts through a Sugarcane Archipelago (at scale)</div></div>
+        <div class="carousel-slide"><img src="assets/img/sugarcane/sugarcane-14.jpg" alt="Sugarcane 14" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Cuts through a Sugarcane Archipelago (at scale)</div></div>
+        <div class="carousel-slide"><img src="assets/img/sugarcane/sugarcane-15.jpg" alt="Sugarcane 15" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Cuts through a Sugarcane Archipelago (at scale)</div></div>
+        <div class="carousel-slide"><img src="assets/img/sugarcane/sugarcane-16.jpg" alt="Sugarcane 16" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Cuts through a Sugarcane Archipelago (at scale)</div></div>
+        <div class="carousel-slide"><img src="assets/img/sugarcane/sugarcane-17.jpg" alt="Sugarcane 17" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Cuts through a Sugarcane Archipelago (at scale)</div></div>
       </div>
+    </div>
+    <button class="carousel-prev" onclick="carouselPrev(this)">&#8249;</button>
+    <button class="carousel-next" onclick="carouselNext(this)">&#8250;</button>
+    <div class="carousel-dots"></div>
+  </div>
+
+  <div class="detail-info">
+    <h2>Cuts through a Sugarcane Archipelago (at scale)</h2>
+    <div class="detail-meta">
+      <span>Digital collage · Various formats · 2024/2025 · Ongoing</span>
+      <span>Satellite imagery source: Google Earth</span>
     </div>
     <div class="detail-text">
       The images focus on the sugarcane system of São Paulo, assembling its spatial links with distant infrastructures at a consistent scale, rendering them commensurable within a single spatial frame.
     </div>
-  </div>
-  <div class="detail-gallery">
-    <div class="img-placeholder wide" style="background-image:url('assets/img/sugarcane/sugarcane-09.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-04.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-16.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-08.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/sugarcane/sugarcane-05.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-12.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-07.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-15.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-02.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/sugarcane/sugarcane-11.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-06.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-01.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-14.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/sugarcane/sugarcane-13.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-10.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/sugarcane/sugarcane-17.jpg'); background-size:cover; background-position:center;"></div>
-  </div>
-  <div class="gallery-caption">
-    Each piece assembles satellite imagery at a consistent scale — from the sugarcane fields of São Paulo's interior to ports, processing plants, and chemical facilities across continents. Satellite imagery source: Google Earth.
   </div>
 </section>
 </div>
 
 <!-- DETAIL: A SELVA QUE NOS ESCAPA -->
 <div id="page-detail-selva" class="page">
-<section id="artwork-detail">
+<section class="artwork-detail-section">
   <a class="back-link" onclick="showPage('artworks')">← Back to Artworks</a>
-  <div class="detail-hero" style="background-image:url('assets/img/selva/selva-04.jpg'); background-size:cover; background-position:center;"></div>
-  <div class="detail-header">
-    <div>
-      <h2>A selva que nos escapa</h2>
-      <div class="detail-meta">
-        <span>Long-term installation & activations</span>
-        <span>Atlantic Forest plants, furniture collected from Mirante do Vale, lighting</span>
-        <span>8 × 9 m · andar43, São Paulo · Since 2020</span>
-        <span>In collaboration with landscape designer Reinaldo Apablaza</span>
+
+  <div class="detail-carousel" id="carousel-selva">
+    <div class="carousel-viewport">
+      <div class="carousel-track">
+        <div class="carousel-slide"><img src="assets/img/selva/selva-01.jpg" alt="A selva que nos escapa 01" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">A selva que nos escapa</div></div>
+        <div class="carousel-slide"><img src="assets/img/selva/selva-02.jpg" alt="A selva que nos escapa 02" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">A selva que nos escapa</div></div>
+        <div class="carousel-slide"><img src="assets/img/selva/selva-03.jpg" alt="A selva que nos escapa 03" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">A selva que nos escapa</div></div>
+        <div class="carousel-slide"><img src="assets/img/selva/selva-04.jpg" alt="A selva que nos escapa 04" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">A selva que nos escapa</div></div>
+        <div class="carousel-slide"><img src="assets/img/selva/selva-05.jpg" alt="A selva que nos escapa 05" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">A selva que nos escapa</div></div>
+        <div class="carousel-slide"><img src="assets/img/selva/selva-06.jpg" alt="A selva que nos escapa 06" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">A selva que nos escapa</div></div>
+        <div class="carousel-slide"><img src="assets/img/selva/selva-07.jpg" alt="A selva que nos escapa 07" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">A selva que nos escapa</div></div>
+        <div class="carousel-slide"><img src="assets/img/selva/selva-08.jpg" alt="A selva que nos escapa 08" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">A selva que nos escapa</div></div>
       </div>
+    </div>
+    <button class="carousel-prev" onclick="carouselPrev(this)">&#8249;</button>
+    <button class="carousel-next" onclick="carouselNext(this)">&#8250;</button>
+    <div class="carousel-dots"></div>
+  </div>
+
+  <div class="detail-info">
+    <h2>A selva que nos escapa</h2>
+    <div class="detail-meta">
+      <span>Long-term installation & activations</span>
+      <span>Atlantic Forest plants, furniture collected from Mirante do Vale, lighting</span>
+      <span>8 × 9 m · andar43, São Paulo · Since 2020</span>
+      <span>In collaboration with landscape designer Reinaldo Apablaza</span>
     </div>
     <div class="detail-text">
       A living installation where native Atlantic Forest species coexist with office furniture salvaged from the Mirante do Vale building. The pocket jungle unfolds against the mineral vastness of downtown São Paulo, creating a dissonant encounter between urban order and vegetal proliferation.<br><br>
       <em>Reunião de animais melancólicos</em> — performance in "A selva que nos escapa", with contributions by Kinda Assis (viola), Ismael Marinho (cello), Charly Ho (lighting), Lucas Araújo and Luisa Furtado (production). Andar43, São Paulo, 2021.<br><br>
-      <span style="color:var(--accent); cursor:pointer;" onclick="showPage('project-andar43')">→ More about "andar43" on Projects & Events</span>
+      <a href="#" onclick="showPage('project-andar43'); return false;">→ More about "andar43" on Projects & Events</a>
     </div>
-  </div>
-  <div class="detail-gallery">
-    <div class="img-placeholder wide" style="background-image:url('assets/img/selva/selva-03.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/selva/selva-01.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/selva/selva-02.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/selva/selva-05.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/selva/selva-06.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/selva/selva-08.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/selva/selva-07.jpg'); background-size:cover; background-position:center;"></div>
-  </div>
-  <div class="gallery-caption">
-    Photos: Vincent Catala, Tuca Vieira, Roberta, Helena Lima, Felipe Scaldini, Bia Ferreira
+    <div class="detail-credits">Photos: Vincent Catala, Tuca Vieira, Roberta, Helena Lima, Felipe Scaldini, Bia Ferreira</div>
   </div>
 </section>
 </div>
 
 <!-- DETAIL: REWILDING SP -->
 <div id="page-detail-rewilding" class="page">
-<section id="artwork-detail">
+<section class="artwork-detail-section">
   <a class="back-link" onclick="showPage('artworks')">← Back to Artworks</a>
-  <div class="detail-hero" style="background-image:url('assets/img/rewilding/rewilding-01.jpg'); background-size:cover; background-position:center;"></div>
-  <div class="detail-header">
-    <div>
-      <h2>Rewilding SP</h2>
-      <div class="detail-meta">
-        <span>Digital collage · 2023</span>
+
+  <div class="detail-carousel" id="carousel-rewilding">
+    <div class="carousel-viewport">
+      <div class="carousel-track">
+        <div class="carousel-slide"><img src="assets/img/rewilding/rewilding-01.jpg" alt="Rewilding SP 01" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Um outro Vale de Anhangabaú possível n°1, series "Rewilding SP", digital collage, 2023. Original photo: André Gomes</div></div>
+        <div class="carousel-slide"><img src="assets/img/rewilding/rewilding-02.jpg" alt="Rewilding SP 02" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Um outro Vale de Anhangabaú possível n°2, series "Rewilding SP", digital collage, 2023. Original photo: Ricardo Yamas</div></div>
       </div>
+    </div>
+    <button class="carousel-prev" onclick="carouselPrev(this)">&#8249;</button>
+    <button class="carousel-next" onclick="carouselNext(this)">&#8250;</button>
+    <div class="carousel-dots"></div>
+  </div>
+
+  <div class="detail-info">
+    <h2>Rewilding SP</h2>
+    <div class="detail-meta">
+      <span>Digital collage · 2023</span>
     </div>
     <div class="detail-text">
       A speculative reoccupation of the city center. Anhangabaú valley, São Paulo, as a site of ecological return where urban order dissolves into vegetal proliferation.
     </div>
-  </div>
-  <div class="detail-gallery">
-    <div class="img-placeholder wide" style="background-image:url('assets/img/rewilding/rewilding-01.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="gallery-caption" style="margin-bottom:24px;">Um outro Vale de Anhangabaú possível n°1, series "Rewilding SP", digital collage, 2023. Original photo: André Gomes</div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/rewilding/rewilding-02.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="gallery-caption" style="margin-bottom:0;">Um outro Vale de Anhangabaú possível n°2, series "Rewilding SP", digital collage, 2023. Original photo: Ricardo Yamas</div>
   </div>
 </section>
 </div>
 
 <!-- DETAIL: OLHOS NOS OLHOS -->
 <div id="page-detail-olhos" class="page">
-<section id="artwork-detail">
+<section class="artwork-detail-section">
   <a class="back-link" onclick="showPage('artworks')">← Back to Artworks</a>
-  <div class="detail-hero" style="background-image:url('assets/img/olhos/olhos-02.jpg'); background-size:cover; background-position:center;"></div>
-  <div class="detail-header">
-    <div>
-      <h2>Olhos nos olhos</h2>
-      <div class="detail-meta">
-        <span>Installation / Urban intervention</span>
-        <span>Digital images, fabrics, lighting, and interactive devices installed in building windows</span>
-        <span>São Paulo, SP</span>
-        <span>Exhibited at "Virada Cultural de São Paulo", 2023</span>
+
+  <div class="detail-carousel" id="carousel-olhos">
+    <div class="carousel-viewport">
+      <div class="carousel-track">
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-01.jpg" alt="Olhos nos olhos 01" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-02.jpg" alt="Olhos nos olhos 02" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-03.jpg" alt="Olhos nos olhos 03" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-04.jpg" alt="Olhos nos olhos 04" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-05.jpg" alt="Olhos nos olhos 05" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-06.jpg" alt="Olhos nos olhos 06" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-07.jpg" alt="Olhos nos olhos 07" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-08.jpg" alt="Olhos nos olhos 08" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-09.jpg" alt="Olhos nos olhos 09" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-10.jpg" alt="Olhos nos olhos 10" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-11.jpg" alt="Olhos nos olhos 11" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-12.jpg" alt="Olhos nos olhos 12" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-13.jpg" alt="Olhos nos olhos 13" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-14.jpg" alt="Olhos nos olhos 14" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-15.jpg" alt="Olhos nos olhos 15" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-16.jpg" alt="Olhos nos olhos 16" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-17.jpg" alt="Olhos nos olhos 17" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-18.jpg" alt="Olhos nos olhos 18" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-19.jpg" alt="Olhos nos olhos 19" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-20.jpg" alt="Olhos nos olhos 20" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-21.jpg" alt="Olhos nos olhos 21" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-22.jpg" alt="Olhos nos olhos 22" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-23.jpg" alt="Olhos nos olhos 23" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-24.jpg" alt="Olhos nos olhos 24" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-25.jpg" alt="Olhos nos olhos 25" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-26.jpg" alt="Olhos nos olhos 26" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-27.jpg" alt="Olhos nos olhos 27" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-28.jpg" alt="Olhos nos olhos 28" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-29.jpg" alt="Olhos nos olhos 29" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-30.jpg" alt="Olhos nos olhos 30" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-31.jpg" alt="Olhos nos olhos 31" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-32.jpg" alt="Olhos nos olhos 32" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-33.jpg" alt="Olhos nos olhos 33" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-34.jpg" alt="Olhos nos olhos 34" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-35.jpg" alt="Olhos nos olhos 35" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-36.jpg" alt="Olhos nos olhos 36" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-37.jpg" alt="Olhos nos olhos 37" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-38.jpg" alt="Olhos nos olhos 38" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-39.jpg" alt="Olhos nos olhos 39" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-40.jpg" alt="Olhos nos olhos 40" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-41.jpg" alt="Olhos nos olhos 41" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-42.jpg" alt="Olhos nos olhos 42" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-43.jpg" alt="Olhos nos olhos 43" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-44.jpg" alt="Olhos nos olhos 44" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-45.jpg" alt="Olhos nos olhos 45" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
+        <div class="carousel-slide"><img src="assets/img/olhos/olhos-46.jpg" alt="Olhos nos olhos 46" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Olhos nos olhos</div></div>
       </div>
+    </div>
+    <button class="carousel-prev" onclick="carouselPrev(this)">&#8249;</button>
+    <button class="carousel-next" onclick="carouselNext(this)">&#8250;</button>
+    <div class="carousel-dots"></div>
+  </div>
+
+  <div class="detail-info">
+    <h2>Olhos nos olhos</h2>
+    <div class="detail-meta">
+      <span>Installation / Urban intervention</span>
+      <span>Digital images, fabrics, lighting, and interactive devices installed in building windows</span>
+      <span>São Paulo, SP</span>
+      <span>Exhibited at Virada Cultural de São Paulo, 2023</span>
     </div>
     <div class="detail-text">
       Images appear in windows. They look back.<br>A dispersed dispositif across the city, activating moments of encounter between interior and exterior, observer and observed.
     </div>
-  </div>
-  <div class="detail-gallery">
-    <div class="img-placeholder wide" style="background-image:url('assets/img/olhos/olhos-01.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-03.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-04.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-05.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/olhos/olhos-06.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-07.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-08.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-09.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-10.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/olhos/olhos-11.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-12.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-13.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-14.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/olhos/olhos-15.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-16.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-17.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-18.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/olhos/olhos-19.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-20.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-21.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-22.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-23.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/olhos/olhos-24.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-25.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-26.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-27.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/olhos/olhos-28.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-29.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-30.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-31.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-32.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/olhos/olhos-33.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-34.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-35.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-36.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/olhos/olhos-37.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-38.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-39.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-40.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-41.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/olhos/olhos-42.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-43.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-44.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-45.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/olhos/olhos-46.jpg'); background-size:cover; background-position:center;"></div>
-  </div>
-  <div class="gallery-caption">
-    Photo: Daniel Frias
+    <div class="detail-credits">Photo: Daniel Frias</div>
   </div>
 </section>
 </div>
 
 <!-- DETAIL: UBRIS -->
 <div id="page-detail-ubris" class="page">
-<section id="artwork-detail">
+<section class="artwork-detail-section">
   <a class="back-link" onclick="showPage('artworks')">← Back to Artworks</a>
-  <div class="detail-hero" style="background-image:url('assets/img/ubris/ubris-18.jpg'); background-size:cover; background-position:center;"></div>
-  <div class="detail-header">
-    <div>
-      <h2>Ubris, des fêtes divines et dérisoires</h2>
-      <div class="detail-meta">
-        <span>Performances / Relational art</span>
-        <span>Site-specific performing parties</span>
-        <span>Abidjan, Côte d'Ivoire · 2015–2018</span>
+
+  <div class="detail-carousel" id="carousel-ubris">
+    <div class="carousel-viewport">
+      <div class="carousel-track">
+        <div class="carousel-slide"><img src="assets/img/ubris/ubris-01.jpg" alt="Ubris 01" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Ubris, des fêtes divines et dérisoires</div></div>
+        <div class="carousel-slide"><img src="assets/img/ubris/ubris-02.jpg" alt="Ubris 02" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Ubris, des fêtes divines et dérisoires</div></div>
+        <div class="carousel-slide"><img src="assets/img/ubris/ubris-03.jpg" alt="Ubris 03" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Ubris, des fêtes divines et dérisoires</div></div>
+        <div class="carousel-slide"><img src="assets/img/ubris/ubris-04.jpg" alt="Ubris 04" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Ubris, des fêtes divines et dérisoires</div></div>
+        <div class="carousel-slide"><img src="assets/img/ubris/ubris-05.jpg" alt="Ubris 05" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Ubris, des fêtes divines et dérisoires</div></div>
+        <div class="carousel-slide"><img src="assets/img/ubris/ubris-06.jpg" alt="Ubris 06" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Ubris, des fêtes divines et dérisoires</div></div>
+        <div class="carousel-slide"><img src="assets/img/ubris/ubris-07.jpg" alt="Ubris 07" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Ubris, des fêtes divines et dérisoires</div></div>
+        <div class="carousel-slide"><img src="assets/img/ubris/ubris-08.jpg" alt="Ubris 08" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Ubris, des fêtes divines et dérisoires</div></div>
+        <div class="carousel-slide"><img src="assets/img/ubris/ubris-09.jpg" alt="Ubris 09" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Ubris, des fêtes divines et dérisoires</div></div>
+        <div class="carousel-slide"><img src="assets/img/ubris/ubris-10.jpg" alt="Ubris 10" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Ubris, des fêtes divines et dérisoires</div></div>
+        <div class="carousel-slide"><img src="assets/img/ubris/ubris-11.jpg" alt="Ubris 11" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Ubris, des fêtes divines et dérisoires</div></div>
+        <div class="carousel-slide"><img src="assets/img/ubris/ubris-12.jpg" alt="Ubris 12" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Ubris, des fêtes divines et dérisoires</div></div>
+        <div class="carousel-slide"><img src="assets/img/ubris/ubris-13.jpg" alt="Ubris 13" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Ubris, des fêtes divines et dérisoires</div></div>
+        <div class="carousel-slide"><img src="assets/img/ubris/ubris-14.jpg" alt="Ubris 14" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Ubris, des fêtes divines et dérisoires</div></div>
+        <div class="carousel-slide"><img src="assets/img/ubris/ubris-15.jpg" alt="Ubris 15" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Ubris, des fêtes divines et dérisoires</div></div>
+        <div class="carousel-slide"><img src="assets/img/ubris/ubris-16.jpg" alt="Ubris 16" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Ubris, des fêtes divines et dérisoires</div></div>
+        <div class="carousel-slide"><img src="assets/img/ubris/ubris-17.jpg" alt="Ubris 17" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Ubris, des fêtes divines et dérisoires</div></div>
+        <div class="carousel-slide"><img src="assets/img/ubris/ubris-18.jpg" alt="Ubris 18" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Ubris, des fêtes divines et dérisoires</div></div>
+        <div class="carousel-slide"><img src="assets/img/ubris/ubris-19.jpg" alt="Ubris 19" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Ubris, des fêtes divines et dérisoires</div></div>
+        <div class="carousel-slide"><img src="assets/img/ubris/ubris-20.jpg" alt="Ubris 20" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Ubris, des fêtes divines et dérisoires</div></div>
+        <div class="carousel-slide"><img src="assets/img/ubris/ubris-21.jpg" alt="Ubris 21" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Ubris, des fêtes divines et dérisoires</div></div>
+        <div class="carousel-slide"><img src="assets/img/ubris/ubris-22.jpg" alt="Ubris 22" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Ubris, des fêtes divines et dérisoires</div></div>
+        <div class="carousel-slide"><img src="assets/img/ubris/ubris-23.jpg" alt="Ubris 23" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Ubris, des fêtes divines et dérisoires</div></div>
+        <div class="carousel-slide"><img src="assets/img/ubris/ubris-24.jpg" alt="Ubris 24" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Ubris, des fêtes divines et dérisoires</div></div>
+        <div class="carousel-slide"><img src="assets/img/ubris/ubris-25.jpg" alt="Ubris 25" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Ubris, des fêtes divines et dérisoires</div></div>
+        <div class="carousel-slide"><img src="assets/img/ubris/ubris-26.jpg" alt="Ubris 26" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Ubris, des fêtes divines et dérisoires</div></div>
+        <div class="carousel-slide"><img src="assets/img/ubris/ubris-27.jpg" alt="Ubris 27" loading="lazy" onclick="openLightbox(this)"><div class="carousel-caption">Ubris, des fêtes divines et dérisoires</div></div>
       </div>
+    </div>
+    <button class="carousel-prev" onclick="carouselPrev(this)">&#8249;</button>
+    <button class="carousel-next" onclick="carouselNext(this)">&#8250;</button>
+    <div class="carousel-dots"></div>
+  </div>
+
+  <div class="detail-info">
+    <h2>Ubris, des fêtes divines et dérisoires</h2>
+    <div class="detail-meta">
+      <span>Performances / Relational art · Site-specific performing parties</span>
+      <span>Abidjan, Côte d'Ivoire · 2015–2018</span>
     </div>
     <div class="detail-text">
       The project unfolds through a series of six performative rave parties. Each explores a dimension of hybris: ambition, transgression, the desire to exceed human limits. Narratives, performances, and scenographies are anchored in specific sites, creating frictions between theme and context. A temporary suspension of order where participants are invited to inhabit, and exhaust, their own excess.<br><br>
-      <a href="https://www.fetesubris.com/" target="_blank" style="color:var(--accent); text-decoration:none; border-bottom:1px solid rgba(200,184,138,0.3);">→ Ubris website</a>
+      <a href="https://www.fetesubris.com/" target="_blank">→ Ubris website</a>
     </div>
-  </div>
-  <div class="detail-gallery">
-    <div class="img-placeholder wide" style="background-image:url('assets/img/ubris/ubris-07.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-01.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-02.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-03.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/ubris/ubris-09.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-04.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-05.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-08.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-10.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/ubris/ubris-11.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-12.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-13.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-14.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-15.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/ubris/ubris-16.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-17.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-19.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-20.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-21.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/ubris/ubris-22.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-23.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-24.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-25.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-26.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/ubris/ubris-27.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-06.jpg'); background-size:cover; background-position:center;"></div>
-  </div>
-  <div class="gallery-caption">
-    Six performative rave parties — Nocturne au musée, Cyber-pygmées, Divine Vidange, Incitatus, and more. Abidjan, Côte d'Ivoire, 2015–2018.
   </div>
 </section>
 </div>
@@ -671,7 +781,7 @@
 
 <!-- PROJECT: SUGARCANE PLANTATION -->
 <div id="page-project-sugarcane" class="page">
-<section id="artwork-detail">
+<section class="artwork-detail-section">
   <a class="back-link" onclick="showPage('projects')">← Back to Projects</a>
   <div class="detail-hero" style="background-image:url('assets/img/home/home-1.jpg'); background-size:cover; background-position:center;"></div>
   <div class="detail-header">
@@ -712,7 +822,7 @@
 
 <!-- PROJECT: ANDAR43 -->
 <div id="page-project-andar43" class="page">
-<section id="artwork-detail">
+<section class="artwork-detail-section">
   <a class="back-link" onclick="showPage('projects')">← Back to Projects</a>
   <div class="detail-hero" style="background-image:url('assets/img/selva/selva-03.jpg'); background-size:cover; background-position:center;"></div>
   <div class="detail-header">
@@ -751,7 +861,7 @@
 
 <!-- PROJECT: UBRIS -->
 <div id="page-project-ubris" class="page">
-<section id="artwork-detail">
+<section class="artwork-detail-section">
   <a class="back-link" onclick="showPage('projects')">← Back to Projects</a>
   <div class="detail-hero" style="background-image:url('assets/img/ubris/ubris-18.jpg'); background-size:cover; background-position:center;"></div>
   <div class="detail-header">
@@ -806,7 +916,7 @@
 
 <!-- PROJECT: DERIVA -->
 <div id="page-project-deriva" class="page">
-<section id="artwork-detail">
+<section class="artwork-detail-section">
   <a class="back-link" onclick="showPage('projects')">← Back to Projects</a>
   <div class="detail-hero" style="background: linear-gradient(135deg, #1a1a22 0%, #20252a 100%); display:flex; align-items:center; justify-content:center; min-height:50vh;"><span style="font:300 13px var(--sans); letter-spacing:2px; text-transform:uppercase; color:var(--text-dim);">Cover image pending</span></div>
   <div class="detail-header">
@@ -849,7 +959,7 @@
 
 <!-- PROJECT: JUNTOS NO EFÊMERO -->
 <div id="page-project-juntos" class="page">
-<section id="artwork-detail">
+<section class="artwork-detail-section">
   <a class="back-link" onclick="showPage('projects')">← Back to Projects</a>
   <div class="detail-hero" style="background: linear-gradient(135deg, #22181a 0%, #2a2020 100%); display:flex; align-items:center; justify-content:center; min-height:50vh;"><span style="font:300 13px var(--sans); letter-spacing:2px; text-transform:uppercase; color:var(--text-dim);">Cover image pending</span></div>
   <div class="detail-header">
@@ -875,7 +985,7 @@
 
 <!-- PROJECT: TKFR -->
 <div id="page-project-tkfr" class="page">
-<section id="artwork-detail">
+<section class="artwork-detail-section">
   <a class="back-link" onclick="showPage('projects')">← Back to Projects</a>
   <div class="detail-hero" style="background: linear-gradient(135deg, #1a1520 0%, #25182a 100%); display:flex; align-items:center; justify-content:center; min-height:50vh;"><span style="font:300 13px var(--sans); letter-spacing:2px; text-transform:uppercase; color:var(--text-dim);">Cover image pending</span></div>
   <div class="detail-header">
@@ -924,6 +1034,15 @@
 </section>
 </div>
 
+<!-- LIGHTBOX OVERLAY -->
+<div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
+  <button class="lightbox-prev" onclick="lightboxPrev(event)">&#8249;</button>
+  <button class="lightbox-next" onclick="lightboxNext(event)">&#8250;</button>
+  <img id="lightboxImg" src="" alt="">
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
 <footer>
   <span>© 2026 Charly Andral Osbourne</span>
   <span>São Paulo, Brazil</span>
@@ -941,14 +1060,26 @@
     }, 5000);
   })();
 
-  // Randomize featured artwork
+  // Scroll reveal for artwork cards
   function randomizeFeatured() {
-    const cards = document.querySelectorAll('#page-artworks .artwork-card');
-    cards.forEach(c => c.classList.remove('featured'));
-    const random = Math.floor(Math.random() * cards.length);
-    cards[random].classList.add('featured');
+    // No-op: kept for compatibility with showPage calls
   }
-  randomizeFeatured();
+  const artworkObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        artworkObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  function observeArtworkCards() {
+    document.querySelectorAll('#page-artworks .artwork-card').forEach(card => {
+      card.classList.remove('visible');
+      artworkObserver.observe(card);
+    });
+  }
+  observeArtworkCards();
 
   // Randomize project cover photos
   function randomizeProjectCovers() {
@@ -964,8 +1095,52 @@
   }
   randomizeProjectCovers();
 
-  function showPage(pageId) {
-    if (pageId === 'artworks') randomizeFeatured();
+  // Page title mapping
+  const pageTitles = {
+    'home': 'Charly Andral Osbourne — Visual Artist & Spatial Researcher',
+    'artworks': 'Artworks — Charly Andral Osbourne',
+    'artwork-detail': 'Artwork — Charly Andral Osbourne',
+    'detail-selva': 'A selva que nos escapa — Charly Andral Osbourne',
+    'detail-rewilding': 'Rewilding — Charly Andral Osbourne',
+    'detail-olhos': 'Olhos nos Olhos — Charly Andral Osbourne',
+    'detail-ubris': 'Ubris — Charly Andral Osbourne',
+    'projects': 'Projects & Events — Charly Andral Osbourne',
+    'project-sugarcane': 'Sugarcane Plantation — Charly Andral Osbourne',
+    'project-andar43': 'andar43 — Charly Andral Osbourne',
+    'project-ubris': 'Ubris (fêtes performatiques) — Charly Andral Osbourne',
+    'project-deriva': 'Deriva — Charly Andral Osbourne',
+    'project-juntos': 'Juntos no efêmero — Charly Andral Osbourne',
+    'project-tkfr': 'TKFR — Charly Andral Osbourne',
+    'about': 'About — Charly Andral Osbourne'
+  };
+
+  // Clean URL path mapping
+  const pageToPath = {
+    'home': '/',
+    'artworks': '/artworks',
+    'artwork-detail': '/artworks/sugarcane',
+    'detail-selva': '/artworks/selva',
+    'detail-rewilding': '/artworks/rewilding',
+    'detail-olhos': '/artworks/olhos',
+    'detail-ubris': '/artworks/ubris',
+    'projects': '/projects',
+    'project-sugarcane': '/projects/sugarcane-plantation',
+    'project-andar43': '/projects/andar43',
+    'project-ubris': '/projects/ubris',
+    'project-deriva': '/projects/deriva',
+    'project-juntos': '/projects/juntos',
+    'project-tkfr': '/projects/tkfr',
+    'about': '/about'
+  };
+
+  // Reverse lookup: path → pageId
+  const pathToPage = {};
+  for (const [page, path] of Object.entries(pageToPath)) {
+    pathToPage[path] = page;
+  }
+
+  function showPage(pageId, pushState) {
+    if (pageId === 'artworks') { randomizeFeatured(); observeArtworkCards(); }
     if (pageId === 'projects') randomizeProjectCovers();
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-' + pageId).classList.add('active');
@@ -974,10 +1149,182 @@
     const navLink = document.getElementById('nav-' + navId);
     if (navLink) navLink.classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Initialize carousels on detail pages
+    if (pageId.includes('detail') || pageId === 'artwork-detail') {
+      setTimeout(initCarousels, 50);
+    }
+    // Update page title
+    document.title = pageTitles[pageId] || 'Charly Andral Osbourne';
+    if (pushState !== false) {
+      const path = pageToPath[pageId] || ('/' + pageId);
+      history.pushState({ page: pageId }, '', path);
+    }
   }
+
+  // Handle browser back/forward buttons
+  window.addEventListener('popstate', function(e) {
+    if (e.state && e.state.page) {
+      showPage(e.state.page, false);
+    } else {
+      // Try to resolve from current path
+      const path = window.location.pathname;
+      const pageId = pathToPage[path] || 'home';
+      showPage(pageId, false);
+    }
+  });
+
+  // Set initial state from URL path or hash (backward compatible)
+  (function() {
+    let pageId = 'home';
+    const path = window.location.pathname;
+    const hash = window.location.hash.replace('#', '');
+
+    if (pathToPage[path]) {
+      pageId = pathToPage[path];
+    } else if (hash && document.getElementById('page-' + hash)) {
+      // Backward compatibility with old hash URLs
+      pageId = hash;
+    }
+
+    if (pageId !== 'home') {
+      showPage(pageId, false);
+    }
+    const cleanPath = pageToPath[pageId] || '/';
+    history.replaceState({ page: pageId }, '', cleanPath);
+  })();
 
   window.addEventListener('scroll', () => {
     document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // ==================== CAROUSEL ====================
+  function getCarouselState(carousel) {
+    if (!carousel._state) {
+      carousel._state = { current: 0 };
+    }
+    return carousel._state;
+  }
+
+  function goToSlide(carousel, index) {
+    const track = carousel.querySelector('.carousel-track');
+    const slides = carousel.querySelectorAll('.carousel-slide');
+    const dots = carousel.querySelectorAll('.carousel-dots .dot');
+    if (!slides.length) return;
+    const state = getCarouselState(carousel);
+    state.current = Math.max(0, Math.min(index, slides.length - 1));
+    track.style.transform = 'translateX(-' + (state.current * 100) + '%)';
+    dots.forEach((d, i) => d.classList.toggle('active', i === state.current));
+  }
+
+  function carouselPrev(btn) {
+    const carousel = btn.closest('.detail-carousel');
+    const state = getCarouselState(carousel);
+    if (state.current > 0) goToSlide(carousel, state.current - 1);
+  }
+
+  function carouselNext(btn) {
+    const carousel = btn.closest('.detail-carousel');
+    const state = getCarouselState(carousel);
+    const total = carousel.querySelectorAll('.carousel-slide').length;
+    if (state.current < total - 1) goToSlide(carousel, state.current + 1);
+  }
+
+  function initCarousels() {
+    document.querySelectorAll('.detail-carousel').forEach(carousel => {
+      const slides = carousel.querySelectorAll('.carousel-slide');
+      const dotsContainer = carousel.querySelector('.carousel-dots');
+      if (!dotsContainer || dotsContainer.children.length) return; // already initialized
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.onclick = () => goToSlide(carousel, i);
+        dotsContainer.appendChild(dot);
+      });
+      carousel._state = { current: 0 };
+
+      // Touch / swipe support
+      let startX = 0, startY = 0, isDragging = false;
+      const viewport = carousel.querySelector('.carousel-viewport');
+      viewport.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        isDragging = true;
+      }, { passive: true });
+      viewport.addEventListener('touchend', (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        const dx = e.changedTouches[0].clientX - startX;
+        const dy = e.changedTouches[0].clientY - startY;
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+          if (dx < 0) carouselNext(carousel.querySelector('.carousel-next'));
+          else carouselPrev(carousel.querySelector('.carousel-prev'));
+        }
+      }, { passive: true });
+    });
+  }
+
+  initCarousels();
+
+  // ==================== LIGHTBOX ====================
+  let lightboxImages = [];
+  let lightboxIndex = 0;
+  let lightboxCaptions = [];
+
+  function openLightbox(img) {
+    const carousel = img.closest('.detail-carousel');
+    if (carousel) {
+      const slides = carousel.querySelectorAll('.carousel-slide');
+      lightboxImages = [];
+      lightboxCaptions = [];
+      slides.forEach(s => {
+        const sImg = s.querySelector('img');
+        const sCap = s.querySelector('.carousel-caption');
+        if (sImg) {
+          lightboxImages.push(sImg.src);
+          lightboxCaptions.push(sCap ? sCap.textContent : '');
+        }
+      });
+      lightboxIndex = lightboxImages.indexOf(img.src);
+      if (lightboxIndex < 0) lightboxIndex = 0;
+    } else {
+      lightboxImages = [img.src];
+      lightboxCaptions = [''];
+      lightboxIndex = 0;
+    }
+    showLightboxImage();
+    document.getElementById('lightboxOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function showLightboxImage() {
+    document.getElementById('lightboxImg').src = lightboxImages[lightboxIndex];
+    document.getElementById('lightboxCaption').textContent = lightboxCaptions[lightboxIndex] || '';
+  }
+
+  function closeLightbox(e) {
+    if (e && e.target !== e.currentTarget && e.target.tagName !== 'BUTTON' && !e.target.classList.contains('lightbox-close')) return;
+    document.getElementById('lightboxOverlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function lightboxPrev(e) {
+    e.stopPropagation();
+    if (lightboxIndex > 0) { lightboxIndex--; showLightboxImage(); }
+  }
+
+  function lightboxNext(e) {
+    e.stopPropagation();
+    if (lightboxIndex < lightboxImages.length - 1) { lightboxIndex++; showLightboxImage(); }
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    const overlay = document.getElementById('lightboxOverlay');
+    if (overlay.classList.contains('active')) {
+      if (e.key === 'Escape') closeLightbox(e);
+      if (e.key === 'ArrowLeft') { if (lightboxIndex > 0) { lightboxIndex--; showLightboxImage(); } }
+      if (e.key === 'ArrowRight') { if (lightboxIndex < lightboxImages.length - 1) { lightboxIndex++; showLightboxImage(); } }
+    }
   });
 </script>
 </body>
