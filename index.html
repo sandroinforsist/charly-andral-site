@@ -416,10 +416,8 @@
 <!-- ARTWORKS -->
 <div id="page-artworks" class="page">
 <section id="artworks">
-  <div class="section-label">Selected works</div>
   <div class="section-header">
     <h2>Artworks</h2>
-    <p>Installations, digital collages, performances, and urban interventions exploring the tensions between nature, infrastructure, and human excess.</p>
   </div>
   <div class="artworks-grid">
     <div class="artwork-card" onclick="showPage('artwork-detail')">
@@ -826,6 +824,9 @@
       This pocket jungle unfolds against the mineral vastness of downtown São Paulo, creating a dissonant encounter between urban order and vegetal proliferation. Inspired by Anna Tsing and Donna Haraway, the project explores how life re-emerges within abandoned infrastructures.<br><br>
       Over time, andar43 has hosted exhibitions, performances, children's workshops, gardening sessions, and culinary experiences centered on Brazilian Atlantic Forest ingredients. These activations extend and intensify the installation <em>A selva que nos escapa</em>, turning the space into a platform for collective experimentation.<br><br>
       Before <em>A selva que nos escapa</em>, the space was first inhabited through another poetic intervention, <em>Três paus, três redes, o fogo</em>, selected from a micro-architecture competition titled <em>O monstro que comia sementes</em>, which invited proposals imagining possible transformations of the site.
+      <div class="detail-links" style="margin-top: 24px; display: flex; flex-direction: column; gap: 8px;">
+        <a href="https://www.instagram.com/andar43_/" target="_blank" rel="noopener" style="color: var(--accent); font: 300 13px var(--sans); text-decoration: none; transition: opacity 0.3s;">→ andar43 on Instagram</a>
+      </div>
     </div>
   </div>
   <div class="detail-gallery" style="display:block;">
@@ -1140,12 +1141,18 @@
     if (e.state && e.state.page) {
       showPage(e.state.page, false);
     } else {
-      // Try to resolve from current path
-      const path = window.location.pathname;
-      const pageId = pathToPage[path] || 'home';
-      showPage(pageId, false);
+      // No state — user went back beyond our SPA history, show home
+      showPage('home', false);
+      history.replaceState({ page: 'home' }, '', '/');
     }
   });
+
+  // Prevent accidentally leaving the site on first back press from Home
+  // Push an extra home state so the first "back" stays in the SPA
+  if (window.performance && window.performance.navigation.type !== 1) {
+    // Not a reload — push a duplicate home state as safety net
+    history.pushState({ page: 'home' }, '', window.location.pathname);
+  }
 
   // Set initial state from URL path or hash (backward compatible)
   (function() {
