@@ -294,7 +294,8 @@
   }
   .project-row:last-child { border-bottom: 1px solid rgba(255,255,255,0.06); }
   .project-row:hover { background: rgba(255,255,255,0.02); }
-  .project-row .img-placeholder { aspect-ratio: 16/9; }
+  .project-row .img-placeholder { aspect-ratio: auto; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .project-row .img-placeholder img { width: 100%; height: auto; display: block; object-fit: contain; }
   .project-info {
     display: flex; flex-direction: column; justify-content: center; padding: 40px 48px;
   }
@@ -372,7 +373,7 @@
     .detail-gallery { grid-template-columns: repeat(2, 1fr); }
     .detail-gallery .img-placeholder.wide { grid-column: span 2; }
     .project-row { grid-template-columns: 1fr; }
-    .project-row .img-placeholder { min-height: 200px; }
+    .project-row .img-placeholder { min-height: auto; }
     .project-row:nth-child(even) { direction: ltr; }
     .about-layout { gap: 32px; }
     nav { padding: 16px 20px; }
@@ -715,48 +716,48 @@
     <h2>Projects & Events</h2>
   </div>
   <div class="projects-list">
-    <div class="project-row" onclick="showPage('project-sugarcane')" data-covers='["assets/img/sugarcane/sugarcane-03.jpg","assets/img/sugarcane/sugarcane-05.jpg","assets/img/sugarcane/sugarcane-09.jpg","assets/img/sugarcane/sugarcane-07.jpg","assets/img/sugarcane/sugarcane-13.jpg","assets/img/sugarcane/sugarcane-16.jpg","assets/img/sugarcane/sugarcane-04.jpg","assets/img/home/home-1.jpg","assets/img/home/home-2.jpg"]'>
-      <div class="img-placeholder" style="background-image:url('assets/img/home/home-1.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="project-row" onclick="showPage('project-sugarcane')" data-covers='["assets/img/projects/sugarcane/sugarcane-project-01.jpg","assets/img/projects/sugarcane/sugarcane-project-03.jpg","assets/img/projects/sugarcane/sugarcane-project-05.jpg","assets/img/projects/sugarcane/sugarcane-project-07.jpg","assets/img/projects/sugarcane/sugarcane-project-09.jpg","assets/img/projects/sugarcane/sugarcane-project-11.jpg","assets/img/projects/sugarcane/sugarcane-project-13.jpg","assets/img/projects/sugarcane/sugarcane-project-15.jpg"]'>
+      <div class="img-placeholder"><img src="assets/img/projects/sugarcane/sugarcane-project-01.jpg" alt="Sugarcane Plantation"></div>
       <div class="project-info">
         <span class="tag">Visual art / Documentary · Since 2024</span>
         <h3>São Paulo, Cuts through a Sugarcane Plantation</h3>
         <p>An ongoing visual research exploring sugarcane landscapes as standardized environments — aesthetic, economic, and infrastructural.</p>
       </div>
     </div>
-    <div class="project-row" onclick="showPage('project-andar43')" data-covers='["assets/img/selva/selva-01.jpg","assets/img/selva/selva-02.jpg","assets/img/selva/selva-03.jpg","assets/img/selva/selva-04.jpg","assets/img/selva/selva-05.jpg","assets/img/selva/selva-06.jpg","assets/img/selva/selva-07.jpg","assets/img/selva/selva-08.jpg","assets/img/home/home-4.jpg","assets/img/home/home-5.jpg"]'>
-      <div class="img-placeholder" style="background-image:url('assets/img/selva/selva-03.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="project-row" onclick="showPage('project-andar43')" data-covers='["assets/img/projects/andar43/andar43-01.jpg","assets/img/projects/andar43/andar43-03.jpg","assets/img/projects/andar43/andar43-05.jpg","assets/img/projects/andar43/andar43-07.jpg","assets/img/projects/andar43/andar43-09.jpg","assets/img/projects/andar43/andar43-11.jpg","assets/img/projects/andar43/andar43-13.jpg"]'>
+      <div class="img-placeholder"><img src="assets/img/projects/andar43/andar43-01.jpg" alt="andar43"></div>
       <div class="project-info">
         <span class="tag">Experimental space · Since 2020</span>
         <h3>andar43</h3>
         <p>A poetic rainforest atop São Paulo. 43rd floor of Mirante do Vale, a former office transformed into a living ecosystem with 100+ native Atlantic Forest species.</p>
       </div>
     </div>
-    <div class="project-row" onclick="showPage('project-deriva')">
-      <div class="img-placeholder" style="background: linear-gradient(135deg, #1a1a22 0%, #20252a 100%); display:flex; align-items:center; justify-content:center;"><span style="font:300 11px var(--sans); letter-spacing:2px; text-transform:uppercase; color:var(--text-dim);">Cover photo pending</span></div>
+    <div class="project-row" onclick="showPage('project-deriva')" data-covers='["assets/img/projects/deriva/deriva-cover.jpg","assets/img/projects/deriva/deriva-01.jpg","assets/img/projects/deriva/deriva-02.jpg","assets/img/projects/deriva/deriva-03.jpg"]'>
+      <div class="img-placeholder"><img src="assets/img/projects/deriva/deriva-cover.jpg" alt="Deriva"></div>
       <div class="project-info">
         <span class="tag">Short documentary films · 2020</span>
         <h3>Deriva "nas entranhas do Mirante"</h3>
         <p>A series of 4 short documentaries drifting through the corridors of Mirante do Vale — Brazil's tallest building for over fifty years.</p>
       </div>
     </div>
-    <div class="project-row" onclick="showPage('project-juntos')">
-      <div class="img-placeholder" style="background: linear-gradient(135deg, #22181a 0%, #2a2020 100%); display:flex; align-items:center; justify-content:center;"><span style="font:300 11px var(--sans); letter-spacing:2px; text-transform:uppercase; color:var(--text-dim);">Cover photo pending</span></div>
+    <div class="project-row" onclick="showPage('project-juntos')" data-covers='["assets/img/projects/juntos/juntos-cover.png","assets/img/projects/juntos/juntos-01.jpg","assets/img/projects/juntos/juntos-02.jpg","assets/img/projects/juntos/juntos-03.jpg","assets/img/projects/juntos/juntos-04.jpg","assets/img/projects/juntos/juntos-05.jpg"]'>
+      <div class="img-placeholder"><img src="assets/img/projects/juntos/juntos-cover.png" alt="Juntos no efêmero"></div>
       <div class="project-info">
         <span class="tag">Memory plaques · 2020</span>
         <h3>Juntos no efêmero</h3>
         <p>Proposal of memory plaques for the Inventário da Memória Paulistana — a situated, subjective approach to memory that embraces the transient nature of urban experience.</p>
       </div>
     </div>
-    <div class="project-row" onclick="showPage('project-ubris')" data-covers='["assets/img/ubris/ubris-01.jpg","assets/img/ubris/ubris-05.jpg","assets/img/ubris/ubris-07.jpg","assets/img/ubris/ubris-09.jpg","assets/img/ubris/ubris-11.jpg","assets/img/ubris/ubris-14.jpg","assets/img/ubris/ubris-18.jpg","assets/img/ubris/ubris-22.jpg","assets/img/ubris/ubris-27.jpg"]'>
-      <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-18.jpg'); background-size:cover; background-position:center;"></div>
+    <div class="project-row" onclick="showPage('project-ubris')" data-covers='["assets/img/projects/ubris/ubris-project-01.jpg","assets/img/projects/ubris/ubris-project-05.jpg","assets/img/projects/ubris/ubris-project-09.jpg","assets/img/projects/ubris/ubris-project-13.jpg","assets/img/projects/ubris/ubris-project-17.jpg","assets/img/projects/ubris/ubris-project-21.jpg","assets/img/projects/ubris/ubris-project-25.jpg"]'>
+      <div class="img-placeholder"><img src="assets/img/projects/ubris/ubris-project-01.jpg" alt="Ubris"></div>
       <div class="project-info">
         <span class="tag">Site-specific parties · 2015–2017</span>
         <h3>Ubris, des fêtes divines et dérisoires</h3>
         <p>Six performative rave parties in Abidjan, Côte d'Ivoire. Each explores a dimension of hybris — ambition, transgression, the desire to exceed human limits.</p>
       </div>
     </div>
-    <div class="project-row" onclick="showPage('project-tkfr')">
-      <div class="img-placeholder" style="background: linear-gradient(135deg, #1a1520 0%, #25182a 100%); display:flex; align-items:center; justify-content:center;"><span style="font:300 11px var(--sans); letter-spacing:2px; text-transform:uppercase; color:var(--text-dim);">Cover photo pending</span></div>
+    <div class="project-row" onclick="showPage('project-tkfr')" data-covers='["assets/img/projects/tkfr/tkfr-01.jpg","assets/img/projects/tkfr/tkfr-02.jpg","assets/img/projects/tkfr/tkfr-03.jpg","assets/img/projects/tkfr/tkfr-04.jpg","assets/img/projects/tkfr/tkfr-05.jpg"]'>
+      <div class="img-placeholder"><img src="assets/img/projects/tkfr/tkfr-01.jpg" alt="TKFR"></div>
       <div class="project-info">
         <span class="tag">Rave parties · 2013–2014</span>
         <h3>TKFR</h3>
@@ -771,7 +772,7 @@
 <div id="page-project-sugarcane" class="page">
 <section class="artwork-detail-section">
   <a class="back-link" onclick="showPage('projects')">← Back to Projects</a>
-  <div class="detail-hero" style="background-image:url('assets/img/home/home-1.jpg'); background-size:cover; background-position:center;"></div>
+  <div class="detail-hero" style="background-image:url('assets/img/projects/sugarcane/sugarcane-project-01.jpg'); background-size:cover; background-position:center;"></div>
   <div class="detail-header">
     <div>
       <h2>Cuts through a Sugarcane Plantation</h2>
@@ -785,25 +786,23 @@
       The research unfolds through a combination of fieldwork, photography, drone footage, and satellite image composition, often recombined into speculative visual constructs. Moving between ground-level immersion and distant, cartographic views, the methodology echoes a shift in scale — from embodied perception to systemic abstraction. This research questions how such territories are seen, "artialized", and ultimately naturalized.
     </div>
   </div>
-  <div class="detail-gallery">
-    <div class="img-placeholder wide" style="background-image:url('assets/img/sugarcane/sugarcane-03.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/home/home-1.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/home/home-2.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-09.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/sugarcane/sugarcane-04.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-05.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-16.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-08.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-12.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/sugarcane/sugarcane-07.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-15.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-02.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-11.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/sugarcane/sugarcane-06.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-14.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-01.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-10.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/sugarcane/sugarcane-13.jpg'); background-size:cover; background-position:center;"></div>
+  <div class="detail-gallery" style="display:block;">
+    <img src="assets/img/projects/sugarcane/sugarcane-project-01.jpg" alt="Sugarcane project 01" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/sugarcane/sugarcane-project-02.jpg" alt="Sugarcane project 02" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/sugarcane/sugarcane-project-03.jpg" alt="Sugarcane project 03" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/sugarcane/sugarcane-project-04.jpg" alt="Sugarcane project 04" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/sugarcane/sugarcane-project-05.jpg" alt="Sugarcane project 05" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/sugarcane/sugarcane-project-06.jpg" alt="Sugarcane project 06" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/sugarcane/sugarcane-project-07.jpg" alt="Sugarcane project 07" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/sugarcane/sugarcane-project-08.jpg" alt="Sugarcane project 08" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/sugarcane/sugarcane-project-09.jpg" alt="Sugarcane project 09" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/sugarcane/sugarcane-project-10.jpg" alt="Sugarcane project 10" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/sugarcane/sugarcane-project-11.jpg" alt="Sugarcane project 11" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/sugarcane/sugarcane-project-12.jpg" alt="Sugarcane project 12" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/sugarcane/sugarcane-project-13.jpg" alt="Sugarcane project 13" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/sugarcane/sugarcane-project-14.jpg" alt="Sugarcane project 14" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/sugarcane/sugarcane-project-15.jpg" alt="Sugarcane project 15" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/sugarcane/sugarcane-project-16.jpg" alt="Sugarcane project 16" style="width:100%; height:auto; display:block; margin-bottom:4px;">
   </div>
 </section>
 </div>
@@ -812,7 +811,7 @@
 <div id="page-project-andar43" class="page">
 <section class="artwork-detail-section">
   <a class="back-link" onclick="showPage('projects')">← Back to Projects</a>
-  <div class="detail-hero" style="background-image:url('assets/img/selva/selva-03.jpg'); background-size:cover; background-position:center;"></div>
+  <div class="detail-hero" style="background-image:url('assets/img/projects/andar43/andar43-01.jpg'); background-size:cover; background-position:center;"></div>
   <div class="detail-header">
     <div>
       <h2>andar43: a poetic rainforest atop São Paulo</h2>
@@ -829,17 +828,21 @@
       Before <em>A selva que nos escapa</em>, the space was first inhabited through another poetic intervention, <em>Três paus, três redes, o fogo</em>, selected from a micro-architecture competition titled <em>O monstro que comia sementes</em>, which invited proposals imagining possible transformations of the site.
     </div>
   </div>
-  <div class="detail-gallery">
-    <div class="img-placeholder wide" style="background-image:url('assets/img/selva/selva-04.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/selva/selva-01.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/selva/selva-02.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/selva/selva-05.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/selva/selva-06.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/selva/selva-08.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/selva/selva-07.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/home/home-4.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/home/home-3.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/home/home-5.jpg'); background-size:cover; background-position:center;"></div>
+  <div class="detail-gallery" style="display:block;">
+    <img src="assets/img/projects/andar43/andar43-01.jpg" alt="andar43 01" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/andar43/andar43-02.jpg" alt="andar43 02" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/andar43/andar43-03.jpg" alt="andar43 03" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/andar43/andar43-04.jpg" alt="andar43 04" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/andar43/andar43-05.jpg" alt="andar43 05" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/andar43/andar43-06.jpg" alt="andar43 06" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/andar43/andar43-07.jpg" alt="andar43 07" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/andar43/andar43-08.jpg" alt="andar43 08" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/andar43/andar43-09.jpg" alt="andar43 09" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/andar43/andar43-10.jpg" alt="andar43 10" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/andar43/andar43-11.jpg" alt="andar43 11" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/andar43/andar43-12.jpg" alt="andar43 12" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/andar43/andar43-13.jpg" alt="andar43 13" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/andar43/andar43-14.jpg" alt="andar43 14" style="width:100%; height:auto; display:block; margin-bottom:4px;">
   </div>
   <div class="gallery-caption">
     Photos: Vincent Catala, Tuca Vieira, Helena Lima, Felipe Scaldini, Bia Ferreira, Daniel Frias
@@ -851,7 +854,7 @@
 <div id="page-project-ubris" class="page">
 <section class="artwork-detail-section">
   <a class="back-link" onclick="showPage('projects')">← Back to Projects</a>
-  <div class="detail-hero" style="background-image:url('assets/img/ubris/ubris-18.jpg'); background-size:cover; background-position:center;"></div>
+  <div class="detail-hero" style="background-image:url('assets/img/projects/ubris/ubris-project-01.jpg'); background-size:cover; background-position:center;"></div>
   <div class="detail-header">
     <div>
       <h2>Ubris, des fêtes divines et dérisoires</h2>
@@ -868,33 +871,34 @@
       <a href="https://www.fetesubris.com/" target="_blank" style="color:var(--accent); text-decoration:none; border-bottom:1px solid rgba(200,184,138,0.3);">→ Ubris website</a>
     </div>
   </div>
-  <div class="detail-gallery">
-    <div class="img-placeholder wide" style="background-image:url('assets/img/ubris/ubris-01.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-02.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-03.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-04.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/ubris/ubris-05.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-06.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-07.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-08.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/ubris/ubris-09.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-10.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-11.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-12.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-13.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/ubris/ubris-14.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-15.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-16.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-17.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/ubris/ubris-19.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-20.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-21.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-22.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/ubris/ubris-23.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-24.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-25.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-26.jpg'); background-size:cover; background-position:center;"></div>
-    <div class="img-placeholder wide" style="background-image:url('assets/img/ubris/ubris-27.jpg'); background-size:cover; background-position:center;"></div>
+  <div class="detail-gallery" style="display:block;">
+    <img src="assets/img/projects/ubris/ubris-project-01.jpg" alt="Ubris project 01" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/ubris/ubris-project-02.jpg" alt="Ubris project 02" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/ubris/ubris-project-03.jpg" alt="Ubris project 03" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/ubris/ubris-project-04.jpg" alt="Ubris project 04" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/ubris/ubris-project-05.jpg" alt="Ubris project 05" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/ubris/ubris-project-06.jpg" alt="Ubris project 06" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/ubris/ubris-project-07.jpg" alt="Ubris project 07" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/ubris/ubris-project-08.jpg" alt="Ubris project 08" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/ubris/ubris-project-09.jpg" alt="Ubris project 09" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/ubris/ubris-project-10.jpg" alt="Ubris project 10" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/ubris/ubris-project-11.jpg" alt="Ubris project 11" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/ubris/ubris-project-12.jpg" alt="Ubris project 12" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/ubris/ubris-project-13.jpg" alt="Ubris project 13" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/ubris/ubris-project-14.jpg" alt="Ubris project 14" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/ubris/ubris-project-15.jpg" alt="Ubris project 15" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/ubris/ubris-project-16.jpg" alt="Ubris project 16" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/ubris/ubris-project-17.jpg" alt="Ubris project 17" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/ubris/ubris-project-18.jpg" alt="Ubris project 18" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/ubris/ubris-project-19.jpg" alt="Ubris project 19" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/ubris/ubris-project-20.jpg" alt="Ubris project 20" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/ubris/ubris-project-21.jpg" alt="Ubris project 21" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/ubris/ubris-project-22.jpg" alt="Ubris project 22" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/ubris/ubris-project-23.jpg" alt="Ubris project 23" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/ubris/ubris-project-24.jpg" alt="Ubris project 24" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/ubris/ubris-project-25.jpg" alt="Ubris project 25" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/ubris/ubris-project-26.jpg" alt="Ubris project 26" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/ubris/ubris-project-27.jpg" alt="Ubris project 27" style="width:100%; height:auto; display:block; margin-bottom:4px;">
   </div>
 </section>
 </div>
@@ -903,7 +907,7 @@
 <div id="page-project-deriva" class="page">
 <section class="artwork-detail-section">
   <a class="back-link" onclick="showPage('projects')">← Back to Projects</a>
-  <div class="detail-hero" style="background: linear-gradient(135deg, #1a1a22 0%, #20252a 100%); display:flex; align-items:center; justify-content:center; min-height:50vh;"><span style="font:300 13px var(--sans); letter-spacing:2px; text-transform:uppercase; color:var(--text-dim);">Cover image pending</span></div>
+  <div class="detail-hero" style="background-image:url('assets/img/projects/deriva/deriva-cover.jpg'); background-size:cover; background-position:center;"></div>
   <div class="detail-header">
     <div>
       <h2>Deriva "nas entranhas do Mirante"</h2>
@@ -916,6 +920,11 @@
       A drift through the corridors of Mirante do Vale, a downtown São Paulo building that stood as Brazil's tallest for over fifty years. Sensitive exchanges with occupants, workers, investors, architects, and residents reveal a structure suspended between ruin and renewal.<br><br>
       Inspired by participatory inventory methods, the narratives are co-constructed with long-time users, whose voices shape the building's living archive.
     </div>
+  </div>
+  <div class="detail-gallery" style="display:block; margin-bottom:40px;">
+    <img src="assets/img/projects/deriva/deriva-01.jpg" alt="Deriva 01" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/deriva/deriva-02.jpg" alt="Deriva 02" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/deriva/deriva-03.jpg" alt="Deriva 03" style="width:100%; height:auto; display:block; margin-bottom:4px;">
   </div>
   <div style="padding:0 40px 60px; display:flex; flex-direction:column; gap:32px;">
     <div style="background:var(--bg-secondary); border-radius:8px; padding:24px;">
@@ -946,7 +955,7 @@
 <div id="page-project-juntos" class="page">
 <section class="artwork-detail-section">
   <a class="back-link" onclick="showPage('projects')">← Back to Projects</a>
-  <div class="detail-hero" style="background: linear-gradient(135deg, #22181a 0%, #2a2020 100%); display:flex; align-items:center; justify-content:center; min-height:50vh;"><span style="font:300 13px var(--sans); letter-spacing:2px; text-transform:uppercase; color:var(--text-dim);">Cover image pending</span></div>
+  <div class="detail-hero" style="background-image:url('assets/img/projects/juntos/juntos-cover.png'); background-size:cover; background-position:center;"></div>
   <div class="detail-header">
     <div>
       <h2>Juntos no efêmero</h2>
@@ -962,8 +971,12 @@
       Three out of six proposals were approved by the jury of the competition.
     </div>
   </div>
-  <div style="padding:0 40px 60px;">
-    <p style="color:var(--text-dim); font-style:italic; font-size:13px; padding:16px; border:1px dashed rgba(136,136,136,0.3); border-radius:4px;">⚠ Photo carousel and PDF document pending — waiting for assets from Charly.</p>
+  <div class="detail-gallery" style="display:block;">
+    <img src="assets/img/projects/juntos/juntos-01.jpg" alt="Juntos 01" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/juntos/juntos-02.jpg" alt="Juntos 02" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/juntos/juntos-03.jpg" alt="Juntos 03" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/juntos/juntos-04.jpg" alt="Juntos 04" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/juntos/juntos-05.jpg" alt="Juntos 05" style="width:100%; height:auto; display:block; margin-bottom:4px;">
   </div>
 </section>
 </div>
@@ -972,7 +985,7 @@
 <div id="page-project-tkfr" class="page">
 <section class="artwork-detail-section">
   <a class="back-link" onclick="showPage('projects')">← Back to Projects</a>
-  <div class="detail-hero" style="background: linear-gradient(135deg, #1a1520 0%, #25182a 100%); display:flex; align-items:center; justify-content:center; min-height:50vh;"><span style="font:300 13px var(--sans); letter-spacing:2px; text-transform:uppercase; color:var(--text-dim);">Cover image pending</span></div>
+  <div class="detail-hero" style="background-image:url('assets/img/projects/tkfr/tkfr-01.jpg'); background-size:cover; background-position:center;"></div>
   <div class="detail-header">
     <div>
       <h2>TKFR</h2>
@@ -986,8 +999,12 @@
       Poster design by Chloé Msset.
     </div>
   </div>
-  <div style="padding:0 40px 60px;">
-    <p style="color:var(--text-dim); font-style:italic; font-size:13px; padding:16px; border:1px dashed rgba(136,136,136,0.3); border-radius:4px;">⚠ Photo carousel pending — waiting for assets from Charly.</p>
+  <div class="detail-gallery" style="display:block;">
+    <img src="assets/img/projects/tkfr/tkfr-01.jpg" alt="TKFR 01" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/tkfr/tkfr-02.jpg" alt="TKFR 02" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/tkfr/tkfr-03.jpg" alt="TKFR 03" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/tkfr/tkfr-04.jpg" alt="TKFR 04" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img src="assets/img/projects/tkfr/tkfr-05.jpg" alt="TKFR 05" style="width:100%; height:auto; display:block; margin-bottom:4px;">
   </div>
 </section>
 </div>
@@ -1046,11 +1063,8 @@
     document.querySelectorAll('#page-projects .project-row[data-covers]').forEach(row => {
       const covers = JSON.parse(row.getAttribute('data-covers'));
       const randomImg = covers[Math.floor(Math.random() * covers.length)];
-      const placeholder = row.querySelector('.img-placeholder');
-      placeholder.style.backgroundImage = "url('" + randomImg + "')";
-      placeholder.style.backgroundSize = 'cover';
-      placeholder.style.backgroundPosition = 'center';
-      placeholder.innerHTML = '';
+      const img = row.querySelector('.img-placeholder img');
+      if (img) img.src = randomImg;
     });
   }
   randomizeProjectCovers();
