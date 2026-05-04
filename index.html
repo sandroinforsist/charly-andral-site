@@ -188,7 +188,8 @@
     min-width: 100%; display: flex; flex-direction: column; align-items: center;
   }
   .carousel-slide img {
-    width: 100%; height: auto; display: block; cursor: pointer;
+    max-width: 100%; max-height: 75vh; width: auto; height: auto; display: block; cursor: pointer;
+    margin: 0 auto;
   }
   .carousel-caption {
     width: 100%; text-align: center; padding: 10px 16px 0;
@@ -317,24 +318,30 @@
 
   #about { padding: 140px 40px 80px; }
   .about-layout {
-    display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: start;
+    display: flex; flex-direction: column; align-items: center;
+    max-width: 720px; margin: 0 auto; gap: 48px;
   }
-  .about-portrait { aspect-ratio: 3/4; width: 100%; max-width: 400px; }
+  .about-portrait {
+    width: 100%; aspect-ratio: 3/2; border-radius: 2px;
+  }
+  .about-content {
+    width: 100%; text-align: left;
+  }
   .about-content h2 { font: 300 42px var(--serif); letter-spacing: 2px; margin-bottom: 32px; }
   .about-content p {
     font: 300 14px var(--sans); line-height: 1.8; color: var(--text-muted);
-    margin-bottom: 20px; max-width: 520px;
+    margin-bottom: 20px;
   }
   .about-contact {
-    margin-top: 48px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.08);
+    margin-top: 48px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.06);
   }
   .about-contact h4 {
     font: 500 11px var(--sans); letter-spacing: 2px; text-transform: uppercase;
     color: var(--text-dim); margin-bottom: 16px;
   }
   .about-contact a {
-    display: block; font: 300 14px var(--sans); color: var(--text-muted);
-    text-decoration: none; margin-bottom: 8px; transition: color 0.3s;
+    display: inline-block; font: 300 14px var(--sans); color: var(--text-muted);
+    text-decoration: none; margin-right: 24px; transition: color 0.3s;
   }
   .about-contact a:hover { color: var(--accent); }
 
@@ -371,7 +378,7 @@
     .project-row { grid-template-columns: 1fr; }
     .project-row .img-placeholder { min-height: 200px; }
     .project-row:nth-child(even) { direction: ltr; }
-    .about-layout { grid-template-columns: 1fr; }
+    .about-layout { gap: 32px; }
     nav { padding: 16px 20px; }
     .nav-links { gap: 16px; }
     .nav-links a { font-size: 11px; }
@@ -455,15 +462,6 @@
       <div class="artwork-info">
         <h3>Ubris, des fêtes divines et dérisoires</h3>
         <span>2015–2018 · Performances · Relational art</span>
-      </div>
-    </div>
-    <div class="artwork-card">
-      <div style="background: linear-gradient(135deg, #1a1520 0%, #25182a 60%, #15101a 100%); display:flex; align-items:center; justify-content:center; min-height: 300px;">
-        <span style="font:300 11px var(--sans); letter-spacing:2px; text-transform:uppercase; color:var(--text-dim);">Photo pending</span>
-      </div>
-      <div class="artwork-info">
-        <h3>Oxymoron Suits (S.A.P.E.)</h3>
-        <span>2015–2018 · Wax fabric garment · Clothing design</span>
       </div>
     </div>
   </div>
@@ -908,9 +906,6 @@
     <div class="img-placeholder" style="background-image:url('assets/img/ubris/ubris-26.jpg'); background-size:cover; background-position:center;"></div>
     <div class="img-placeholder wide" style="background-image:url('assets/img/ubris/ubris-27.jpg'); background-size:cover; background-position:center;"></div>
   </div>
-  <div class="gallery-caption">
-    Six performative rave parties — Nocturne au musée, Cyber-pygmées, Divine Vidange, Incitatus, and more. Abidjan, Côte d'Ivoire, 2015–2017.
-  </div>
 </section>
 </div>
 
@@ -1012,22 +1007,16 @@
 <section id="about">
   <div class="section-label">About</div>
   <div class="about-layout">
-    <div class="about-portrait img-placeholder" style="background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px;">
-      <span style="font:300 32px var(--serif); color:var(--text-dim);">📷</span>
-      <span style="font:300 11px var(--sans); letter-spacing:2px; text-transform:uppercase; color:var(--text-dim);">Portrait pending</span>
+    <div class="about-portrait img-placeholder" style="background-image:url('assets/img/about-portrait.jpg'); background-size:cover; background-position:center top;">
     </div>
     <div class="about-content">
-      <h2>Charly Andral Osbourne</h2>
-      <p>Visual artist and spatial researcher based in São Paulo, Brazil. Working across digital collage, installation, performance, and documentary, his practice explores the tensions between ecological systems, urban infrastructure, and collective memory.</p>
-      <p>His work often operates at the intersection of landscape and politics — examining how territories are shaped, perceived, and naturalized through extraction, monoculture, and colonial logics. Central to his approach is a commitment to site-specific engagement, participatory processes, and the activation of overlooked spaces.</p>
-      <p>Since 2020, he has been developing andar43, an experimental space on the 43rd floor of the Mirante do Vale building in downtown São Paulo — a poetic rainforest where native Atlantic Forest species coexist with salvaged office furniture.</p>
-      <p style="color:var(--text-dim); font-style:italic; font-size:13px; margin-top:16px; padding:16px; border:1px dashed rgba(136,136,136,0.3); border-radius:4px;">⚠ Bio text is a placeholder — waiting for Charly's final bio, education, exhibitions list, and selected press.</p>
+      <h3 style="font: 400 28px var(--serif); letter-spacing: 1.5px; margin-bottom: 12px; color: var(--text);">Charly Andral Osbourne</h3>
+      <p style="font: 300 13px var(--sans); letter-spacing: 1px; color: var(--text-dim); margin-bottom: 32px;">Visual artist · Spatial researcher · São Paulo, Brazil</p>
+      <p>His practice spans digital collage, installation, performance, and documentary — exploring the tensions between ecological systems, urban infrastructure, and collective memory.</p>
+      <p style="color:var(--text-dim); font-style:italic; font-size:13px; margin-top:16px; padding:16px; border:1px dashed rgba(136,136,136,0.3); border-radius:4px;">Full bio pending.</p>
       <div class="about-contact">
         <h4>Contact</h4>
-        <a href="#">charlyandral@email.com</a>
-        <a href="#">Instagram</a>
-        <a href="#">andar43.com</a>
-        <p style="color:var(--text-dim); font-style:italic; font-size:12px; margin-top:8px;">↑ Placeholder links — waiting for real contact details</p>
+        <a href="https://www.instagram.com/osbournecharly/" target="_blank">Instagram</a>
       </div>
     </div>
   </div>
