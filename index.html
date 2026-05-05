@@ -279,6 +279,8 @@
   }
   .detail-header h2 { font: 300 42px var(--serif); letter-spacing: 2px; margin-bottom: 16px; }
   .detail-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .detail-gallery[style*="display:block"] { display: block !important; max-width: 900px; margin: 0 auto; }
+  .detail-gallery[style*="display:block"] img { max-width: 100%; width: auto; max-height: 80vh; }
   .detail-gallery .img-placeholder { aspect-ratio: 1; }
   .detail-gallery .img-placeholder.wide { grid-column: span 2; aspect-ratio: 2/1; }
   .gallery-caption {
@@ -785,22 +787,22 @@
     </div>
   </div>
   <div class="detail-gallery" style="display:block;">
-    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-01.webp" alt="Sugarcane project 01" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-02.webp" alt="Sugarcane project 02" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-03.webp" alt="Sugarcane project 03" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-04.webp" alt="Sugarcane project 04" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-05.webp" alt="Sugarcane project 05" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-06.webp" alt="Sugarcane project 06" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-07.webp" alt="Sugarcane project 07" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-08.webp" alt="Sugarcane project 08" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-09.webp" alt="Sugarcane project 09" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-10.webp" alt="Sugarcane project 10" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-11.webp" alt="Sugarcane project 11" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-12.webp" alt="Sugarcane project 12" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-13.webp" alt="Sugarcane project 13" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-14.webp" alt="Sugarcane project 14" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-15.webp" alt="Sugarcane project 15" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-16.webp" alt="Sugarcane project 16" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-01.webp" alt="Sugarcane project 01" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-02.webp" alt="Sugarcane project 02" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-03.webp" alt="Sugarcane project 03" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-04.webp" alt="Sugarcane project 04" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-05.webp" alt="Sugarcane project 05" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-06.webp" alt="Sugarcane project 06" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-07.webp" alt="Sugarcane project 07" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-08.webp" alt="Sugarcane project 08" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-09.webp" alt="Sugarcane project 09" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-10.webp" alt="Sugarcane project 10" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-11.webp" alt="Sugarcane project 11" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-12.webp" alt="Sugarcane project 12" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-13.webp" alt="Sugarcane project 13" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-14.webp" alt="Sugarcane project 14" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-15.webp" alt="Sugarcane project 15" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-16.webp" alt="Sugarcane project 16" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
   </div>
 </section>
 </div>
@@ -830,20 +832,20 @@
     </div>
   </div>
   <div class="detail-gallery" style="display:block;">
-    <img loading="lazy" src="/assets/img/projects/andar43/andar43-01.webp" alt="andar43 01" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/andar43/andar43-02.webp" alt="andar43 02" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/andar43/andar43-03.webp" alt="andar43 03" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/andar43/andar43-04.webp" alt="andar43 04" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/andar43/andar43-05.webp" alt="andar43 05" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/andar43/andar43-06.webp" alt="andar43 06" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/andar43/andar43-07.webp" alt="andar43 07" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/andar43/andar43-08.webp" alt="andar43 08" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/andar43/andar43-09.webp" alt="andar43 09" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/andar43/andar43-10.webp" alt="andar43 10" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/andar43/andar43-11.webp" alt="andar43 11" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/andar43/andar43-12.webp" alt="andar43 12" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/andar43/andar43-13.webp" alt="andar43 13" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/andar43/andar43-14.webp" alt="andar43 14" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img loading="lazy" src="/assets/img/projects/andar43/andar43-01.webp" alt="andar43 01" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/andar43/andar43-02.webp" alt="andar43 02" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/andar43/andar43-03.webp" alt="andar43 03" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/andar43/andar43-04.webp" alt="andar43 04" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/andar43/andar43-05.webp" alt="andar43 05" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/andar43/andar43-06.webp" alt="andar43 06" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/andar43/andar43-07.webp" alt="andar43 07" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/andar43/andar43-08.webp" alt="andar43 08" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/andar43/andar43-09.webp" alt="andar43 09" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/andar43/andar43-10.webp" alt="andar43 10" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/andar43/andar43-11.webp" alt="andar43 11" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/andar43/andar43-12.webp" alt="andar43 12" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/andar43/andar43-13.webp" alt="andar43 13" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/andar43/andar43-14.webp" alt="andar43 14" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
   </div>
   <div class="gallery-caption">
     Photos: Vincent Catala, Tuca Vieira, Helena Lima, Felipe Scaldini, Bia Ferreira, Daniel Frias
@@ -873,33 +875,33 @@
     </div>
   </div>
   <div class="detail-gallery" style="display:block;">
-    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-01.webp" alt="Ubris project 01" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-02.webp" alt="Ubris project 02" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-03.webp" alt="Ubris project 03" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-04.webp" alt="Ubris project 04" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-05.webp" alt="Ubris project 05" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-06.webp" alt="Ubris project 06" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-07.webp" alt="Ubris project 07" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-08.webp" alt="Ubris project 08" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-09.webp" alt="Ubris project 09" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-10.webp" alt="Ubris project 10" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-11.webp" alt="Ubris project 11" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-12.webp" alt="Ubris project 12" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-13.webp" alt="Ubris project 13" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-14.webp" alt="Ubris project 14" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-15.webp" alt="Ubris project 15" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-16.webp" alt="Ubris project 16" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-17.webp" alt="Ubris project 17" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-18.webp" alt="Ubris project 18" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-19.webp" alt="Ubris project 19" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-20.webp" alt="Ubris project 20" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-21.webp" alt="Ubris project 21" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-22.webp" alt="Ubris project 22" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-23.webp" alt="Ubris project 23" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-24.webp" alt="Ubris project 24" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-25.webp" alt="Ubris project 25" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-26.webp" alt="Ubris project 26" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-27.webp" alt="Ubris project 27" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-01.webp" alt="Ubris project 01" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-02.webp" alt="Ubris project 02" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-03.webp" alt="Ubris project 03" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-04.webp" alt="Ubris project 04" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-05.webp" alt="Ubris project 05" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-06.webp" alt="Ubris project 06" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-07.webp" alt="Ubris project 07" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-08.webp" alt="Ubris project 08" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-09.webp" alt="Ubris project 09" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-10.webp" alt="Ubris project 10" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-11.webp" alt="Ubris project 11" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-12.webp" alt="Ubris project 12" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-13.webp" alt="Ubris project 13" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-14.webp" alt="Ubris project 14" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-15.webp" alt="Ubris project 15" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-16.webp" alt="Ubris project 16" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-17.webp" alt="Ubris project 17" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-18.webp" alt="Ubris project 18" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-19.webp" alt="Ubris project 19" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-20.webp" alt="Ubris project 20" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-21.webp" alt="Ubris project 21" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-22.webp" alt="Ubris project 22" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-23.webp" alt="Ubris project 23" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-24.webp" alt="Ubris project 24" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-25.webp" alt="Ubris project 25" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-26.webp" alt="Ubris project 26" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/ubris/ubris-project-27.webp" alt="Ubris project 27" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
   </div>
 </section>
 </div>
@@ -923,9 +925,9 @@
     </div>
   </div>
   <div class="detail-gallery" style="display:block; margin-bottom:40px;">
-    <img loading="lazy" src="/assets/img/projects/deriva/deriva-01.webp" alt="Deriva 01" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/deriva/deriva-02.webp" alt="Deriva 02" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/deriva/deriva-03.webp" alt="Deriva 03" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img loading="lazy" src="/assets/img/projects/deriva/deriva-01.webp" alt="Deriva 01" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/deriva/deriva-02.webp" alt="Deriva 02" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/deriva/deriva-03.webp" alt="Deriva 03" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
   </div>
   <div style="padding:0 40px 60px; display:flex; flex-direction:column; gap:32px;">
     <div style="background:var(--bg-secondary); border-radius:8px; padding:24px;">
@@ -973,11 +975,11 @@
     </div>
   </div>
   <div class="detail-gallery" style="display:block;">
-    <img loading="lazy" src="/assets/img/projects/juntos/juntos-01.webp" alt="Juntos 01" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/juntos/juntos-02.webp" alt="Juntos 02" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/juntos/juntos-03.webp" alt="Juntos 03" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/juntos/juntos-04.webp" alt="Juntos 04" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/juntos/juntos-05.webp" alt="Juntos 05" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img loading="lazy" src="/assets/img/projects/juntos/juntos-01.webp" alt="Juntos 01" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/juntos/juntos-02.webp" alt="Juntos 02" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/juntos/juntos-03.webp" alt="Juntos 03" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/juntos/juntos-04.webp" alt="Juntos 04" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/juntos/juntos-05.webp" alt="Juntos 05" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
   </div>
 </section>
 </div>
@@ -1001,11 +1003,11 @@
     </div>
   </div>
   <div class="detail-gallery" style="display:block;">
-    <img loading="lazy" src="/assets/img/projects/tkfr/tkfr-01.webp" alt="TKFR 01" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/tkfr/tkfr-02.webp" alt="TKFR 02" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/tkfr/tkfr-03.webp" alt="TKFR 03" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/tkfr/tkfr-04.webp" alt="TKFR 04" style="width:100%; height:auto; display:block; margin-bottom:4px;">
-    <img loading="lazy" src="/assets/img/projects/tkfr/tkfr-05.webp" alt="TKFR 05" style="width:100%; height:auto; display:block; margin-bottom:4px;">
+    <img loading="lazy" src="/assets/img/projects/tkfr/tkfr-01.webp" alt="TKFR 01" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/tkfr/tkfr-02.webp" alt="TKFR 02" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/tkfr/tkfr-03.webp" alt="TKFR 03" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/tkfr/tkfr-04.webp" alt="TKFR 04" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+    <img loading="lazy" src="/assets/img/projects/tkfr/tkfr-05.webp" alt="TKFR 05" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
   </div>
 </section>
 </div>
