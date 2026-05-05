@@ -312,6 +312,8 @@
   .project-info p {
     font: 300 13px var(--sans); color: var(--text-muted); line-height: 1.6; max-width: 400px;
   }
+  .project-row--portrait .img-placeholder { aspect-ratio: 3/4; }
+  .project-row--portrait .img-placeholder img { object-fit: contain; object-position: center; }
   .project-row:nth-child(even) { direction: rtl; }
   .project-row:nth-child(even) > * { direction: ltr; }
 
@@ -800,7 +802,7 @@
         <p>Six performative rave parties in Abidjan, Côte d'Ivoire. Each explores a dimension of hybris — ambition, transgression, the desire to exceed human limits.</p>
       </div>
     </div>
-    <div class="project-row" onclick="showPage('project-tkfr')" data-covers='["/assets/img/projects/tkfr/tkfr-01.webp","/assets/img/projects/tkfr/tkfr-02.webp","/assets/img/projects/tkfr/tkfr-03.webp","/assets/img/projects/tkfr/tkfr-04.webp","/assets/img/projects/tkfr/tkfr-05.webp"]'>
+    <div class="project-row project-row--portrait" onclick="showPage('project-tkfr')" data-covers='["/assets/img/projects/tkfr/tkfr-01.webp","/assets/img/projects/tkfr/tkfr-02.webp","/assets/img/projects/tkfr/tkfr-03.webp","/assets/img/projects/tkfr/tkfr-04.webp","/assets/img/projects/tkfr/tkfr-05.webp"]'>
       <div class="img-placeholder"><img loading="lazy" src="/assets/img/projects/tkfr/tkfr-01.webp" alt="TKFR"></div>
       <div class="project-info">
         <span class="tag">Rave parties · 2013–2014</span>
