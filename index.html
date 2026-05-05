@@ -296,8 +296,8 @@
   }
   .project-row:last-child { border-bottom: 1px solid rgba(255,255,255,0.06); }
   .project-row:hover { background: rgba(255,255,255,0.02); }
-  .project-row .img-placeholder { aspect-ratio: auto; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-  .project-row .img-placeholder img { width: 100%; height: auto; display: block; object-fit: contain; }
+  .project-row .img-placeholder { aspect-ratio: 3/2; overflow: hidden; }
+  .project-row .img-placeholder img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; }
   .project-info {
     display: flex; flex-direction: column; justify-content: center; padding: 40px 48px;
   }
@@ -375,7 +375,7 @@
     .detail-gallery { grid-template-columns: repeat(2, 1fr); }
     .detail-gallery .img-placeholder.wide { grid-column: span 2; }
     .project-row { grid-template-columns: 1fr; }
-    .project-row .img-placeholder { min-height: auto; }
+    .project-row .img-placeholder { min-height: auto; aspect-ratio: 3/2; }
     .project-row:nth-child(even) { direction: ltr; }
     .about-layout { gap: 32px; }
     nav { padding: 16px 20px; }
@@ -715,7 +715,7 @@
     <h2>Projects & Events</h2>
   </div>
   <div class="projects-list">
-    <div class="project-row" onclick="showPage('project-sugarcane')" data-covers='["/assets/img/projects/sugarcane/sugarcane-project-01.webp","/assets/img/projects/sugarcane/sugarcane-project-03.webp","/assets/img/projects/sugarcane/sugarcane-project-05.webp","/assets/img/projects/sugarcane/sugarcane-project-07.webp","/assets/img/projects/sugarcane/sugarcane-project-09.webp","/assets/img/projects/sugarcane/sugarcane-project-11.webp","/assets/img/projects/sugarcane/sugarcane-project-13.webp","/assets/img/projects/sugarcane/sugarcane-project-15.webp"]'>
+    <div class="project-row" onclick="showPage('project-sugarcane')" data-covers='["/assets/img/projects/sugarcane/sugarcane-project-01.webp","/assets/img/projects/sugarcane/sugarcane-project-03.webp","/assets/img/projects/sugarcane/sugarcane-project-05.webp","/assets/img/projects/sugarcane/sugarcane-project-07.webp","/assets/img/projects/sugarcane/sugarcane-project-09.webp","/assets/img/projects/sugarcane/sugarcane-project-15.webp"]'>
       <div class="img-placeholder"><img loading="lazy" src="/assets/img/projects/sugarcane/sugarcane-project-01.webp" alt="Sugarcane Plantation"></div>
       <div class="project-info">
         <span class="tag">Visual art / Documentary · Since 2024</span>
@@ -723,8 +723,8 @@
         <p>An ongoing visual research exploring sugarcane landscapes as standardized environments — aesthetic, economic, and infrastructural.</p>
       </div>
     </div>
-    <div class="project-row" onclick="showPage('project-andar43')" data-covers='["/assets/img/projects/andar43/andar43-01.webp","/assets/img/projects/andar43/andar43-03.webp","/assets/img/projects/andar43/andar43-05.webp","/assets/img/projects/andar43/andar43-07.webp","/assets/img/projects/andar43/andar43-09.webp","/assets/img/projects/andar43/andar43-11.webp","/assets/img/projects/andar43/andar43-13.webp"]'>
-      <div class="img-placeholder"><img loading="lazy" src="/assets/img/projects/andar43/andar43-01.webp" alt="andar43"></div>
+    <div class="project-row" onclick="showPage('project-andar43')" data-covers='["/assets/img/projects/andar43/andar43-04.webp","/assets/img/projects/andar43/andar43-07.webp","/assets/img/projects/andar43/andar43-09.webp","/assets/img/projects/andar43/andar43-11.webp","/assets/img/projects/andar43/andar43-13.webp"]'>
+      <div class="img-placeholder"><img loading="lazy" src="/assets/img/projects/andar43/andar43-04.webp" alt="andar43"></div>
       <div class="project-info">
         <span class="tag">Experimental space · Since 2020</span>
         <h3>andar43</h3>
@@ -747,7 +747,7 @@
         <p>Proposal of memory plaques for the Inventário da Memória Paulistana — a situated, subjective approach to memory that embraces the transient nature of urban experience.</p>
       </div>
     </div>
-    <div class="project-row" onclick="showPage('project-ubris')" data-covers='["/assets/img/projects/ubris/ubris-project-01.webp","/assets/img/projects/ubris/ubris-project-05.webp","/assets/img/projects/ubris/ubris-project-09.webp","/assets/img/projects/ubris/ubris-project-13.webp","/assets/img/projects/ubris/ubris-project-17.webp","/assets/img/projects/ubris/ubris-project-21.webp","/assets/img/projects/ubris/ubris-project-25.webp"]'>
+    <div class="project-row" onclick="showPage('project-ubris')" data-covers='["/assets/img/projects/ubris/ubris-project-01.webp","/assets/img/projects/ubris/ubris-project-05.webp","/assets/img/projects/ubris/ubris-project-07.webp","/assets/img/projects/ubris/ubris-project-09.webp","/assets/img/projects/ubris/ubris-project-17.webp","/assets/img/projects/ubris/ubris-project-21.webp","/assets/img/projects/ubris/ubris-project-25.webp"]'>
       <div class="img-placeholder"><img loading="lazy" src="/assets/img/projects/ubris/ubris-project-01.webp" alt="Ubris"></div>
       <div class="project-info">
         <span class="tag">Site-specific parties · 2015–2017</span>
