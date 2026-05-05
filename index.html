@@ -315,6 +315,40 @@
   .project-row:nth-child(even) { direction: rtl; }
   .project-row:nth-child(even) > * { direction: ltr; }
 
+  .deriva-video-thumb {
+    position: relative; display: block; overflow: hidden; border-radius: 6px;
+    text-decoration: none; cursor: pointer; aspect-ratio: 16/9;
+  }
+  .deriva-video-thumb img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform 0.4s ease, filter 0.4s ease;
+    filter: brightness(0.75);
+  }
+  .deriva-video-thumb:hover img { transform: scale(1.03); filter: brightness(0.55); }
+  .deriva-play {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 56px; height: 56px; border-radius: 50%;
+    background: rgba(255,255,255,0.15); backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; color: #fff; transition: background 0.3s, transform 0.3s;
+    pointer-events: none;
+  }
+  .deriva-video-thumb:hover .deriva-play { background: rgba(200,184,138,0.4); transform: translate(-50%, -50%) scale(1.1); }
+  .deriva-thumb-caption {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 16px; background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    font: 400 14px var(--serif); color: #fff; pointer-events: none;
+  }
+  .deriva-thumb-caption span { font: 300 11px var(--sans); color: rgba(255,255,255,0.6); }
+
+  .juntos-gallery {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    max-width: 720px; margin: 0 auto; padding-bottom: 60px;
+  }
+  .juntos-gallery img {
+    width: 100%; height: auto; display: block; border-radius: 4px;
+  }
+
   #about { padding: 140px 40px 80px; }
   .about-layout {
     display: flex; flex-direction: column; align-items: center;
@@ -377,6 +411,9 @@
     .project-row { grid-template-columns: 1fr; }
     .project-row .img-placeholder { min-height: auto; aspect-ratio: 3/2; }
     .project-row:nth-child(even) { direction: ltr; }
+    #page-project-deriva .deriva-video-thumb { aspect-ratio: 16/9; }
+    #page-project-deriva div[style*="grid-template-columns"] { grid-template-columns: 1fr !important; max-width: 100%; }
+    .juntos-gallery { grid-template-columns: repeat(2, 1fr); gap: 12px; }
     .about-layout { gap: 32px; }
     nav { padding: 16px 20px; }
     .nav-links { gap: 16px; }
@@ -926,32 +963,27 @@
       Inspired by participatory inventory methods, the narratives are co-constructed with long-time users, whose voices shape the building's living archive.
     </div>
   </div>
-  <div class="detail-gallery" style="display:block; margin-bottom:40px;">
-    <img loading="lazy" src="/assets/img/projects/deriva/deriva-01.webp" alt="Deriva 01" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
-    <img loading="lazy" src="/assets/img/projects/deriva/deriva-02.webp" alt="Deriva 02" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
-    <img loading="lazy" src="/assets/img/projects/deriva/deriva-03.webp" alt="Deriva 03" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
-  </div>
-  <div style="padding:0 40px 60px; display:flex; flex-direction:column; gap:32px;">
-    <div style="background:var(--bg-secondary); border-radius:8px; padding:24px;">
-      <h4 style="font:400 16px var(--serif); color:var(--text); margin-bottom:12px;">Edifício Mirante do Vale — primeiro passeio pelos andares</h4>
-      <p style="font:300 13px var(--sans); color:var(--text-muted); margin-bottom:12px;">Film, 5 min, 2020</p>
-      <a href="https://www.youtube.com/watch?v=BdTIn6mVxZU" target="_blank" style="color:var(--accent); font:300 13px var(--sans); text-decoration:none;">▶ Watch on YouTube</a>
-    </div>
-    <div style="background:var(--bg-secondary); border-radius:8px; padding:24px;">
-      <h4 style="font:400 16px var(--serif); color:var(--text); margin-bottom:12px;">Mirante do Vale, o prédio que dava golpes!</h4>
-      <p style="font:300 13px var(--sans); color:var(--text-muted); margin-bottom:12px;">Film, 7 min, 2020</p>
-      <a href="https://www.youtube.com/watch?v=p8BDn0iRSAI" target="_blank" style="color:var(--accent); font:300 13px var(--sans); text-decoration:none;">▶ Watch on YouTube</a>
-    </div>
-    <div style="background:var(--bg-secondary); border-radius:8px; padding:24px;">
-      <h4 style="font:400 16px var(--serif); color:var(--text); margin-bottom:12px;">O edifício Mirante do Vale é lindo ou feio?</h4>
-      <p style="font:300 13px var(--sans); color:var(--text-muted); margin-bottom:12px;">Film, 5 min, 2020</p>
-      <a href="https://www.youtube.com/watch?v=6r_bypQZ7mA" target="_blank" style="color:var(--accent); font:300 13px var(--sans); text-decoration:none;">▶ Watch on YouTube</a>
-    </div>
-    <div style="background:var(--bg-secondary); border-radius:8px; padding:24px;">
-      <h4 style="font:400 16px var(--serif); color:var(--text); margin-bottom:12px;">O Mirante do Vale — prédio mutante</h4>
-      <p style="font:300 13px var(--sans); color:var(--text-muted); margin-bottom:12px;">Film, 10 min, 2020</p>
-      <a href="https://www.youtube.com/watch?v=AIbiRfnM0vg" target="_blank" style="color:var(--accent); font:300 13px var(--sans); text-decoration:none;">▶ Watch on YouTube</a>
-    </div>
+  <div style="max-width:900px; margin:0 auto; padding:0 0 60px; display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+    <a href="https://www.youtube.com/watch?v=BdTIn6mVxZU" target="_blank" rel="noopener" class="deriva-video-thumb">
+      <img loading="lazy" src="/assets/img/projects/deriva/deriva-01.webp" alt="Edifício Mirante do Vale — primeiro passeio pelos andares">
+      <div class="deriva-play">▶</div>
+      <div class="deriva-thumb-caption">Edifício Mirante do Vale — primeiro passeio pelos andares<br><span>Film, 5 min, 2020</span></div>
+    </a>
+    <a href="https://www.youtube.com/watch?v=p8BDn0iRSAI" target="_blank" rel="noopener" class="deriva-video-thumb">
+      <img loading="lazy" src="/assets/img/projects/deriva/deriva-02.webp" alt="Mirante do Vale, o prédio que dava golpes!">
+      <div class="deriva-play">▶</div>
+      <div class="deriva-thumb-caption">Mirante do Vale, o prédio que dava golpes!<br><span>Film, 7 min, 2020</span></div>
+    </a>
+    <a href="https://www.youtube.com/watch?v=6r_bypQZ7mA" target="_blank" rel="noopener" class="deriva-video-thumb">
+      <img loading="lazy" src="/assets/img/projects/deriva/deriva-03.webp" alt="O edifício Mirante do Vale é lindo ou feio?">
+      <div class="deriva-play">▶</div>
+      <div class="deriva-thumb-caption">O edifício Mirante do Vale é lindo ou feio?<br><span>Film, 5 min, 2020</span></div>
+    </a>
+    <a href="https://www.youtube.com/watch?v=AIbiRfnM0vg" target="_blank" rel="noopener" class="deriva-video-thumb">
+      <img loading="lazy" src="/assets/img/projects/deriva/deriva-cover.webp" alt="O Mirante do Vale — prédio mutante">
+      <div class="deriva-play">▶</div>
+      <div class="deriva-thumb-caption">O Mirante do Vale — prédio mutante<br><span>Film, 10 min, 2020</span></div>
+    </a>
   </div>
 </section>
 </div>
@@ -976,12 +1008,12 @@
       Three out of six proposals were approved by the jury of the competition.
     </div>
   </div>
-  <div class="detail-gallery" style="display:block;">
-    <img loading="lazy" src="/assets/img/projects/juntos/juntos-01.webp" alt="Juntos 01" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
-    <img loading="lazy" src="/assets/img/projects/juntos/juntos-02.webp" alt="Juntos 02" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
-    <img loading="lazy" src="/assets/img/projects/juntos/juntos-03.webp" alt="Juntos 03" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
-    <img loading="lazy" src="/assets/img/projects/juntos/juntos-04.webp" alt="Juntos 04" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
-    <img loading="lazy" src="/assets/img/projects/juntos/juntos-05.webp" alt="Juntos 05" style="max-width:100%; height:auto; display:block; margin: 0 auto 24px auto;">
+  <div class="juntos-gallery">
+    <img loading="lazy" src="/assets/img/projects/juntos/juntos-01.webp" alt="Juntos 01">
+    <img loading="lazy" src="/assets/img/projects/juntos/juntos-02.webp" alt="Juntos 02">
+    <img loading="lazy" src="/assets/img/projects/juntos/juntos-03.webp" alt="Juntos 03">
+    <img loading="lazy" src="/assets/img/projects/juntos/juntos-04.webp" alt="Juntos 04">
+    <img loading="lazy" src="/assets/img/projects/juntos/juntos-05.webp" alt="Juntos 05">
   </div>
 </section>
 </div>
